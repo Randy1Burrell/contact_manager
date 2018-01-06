@@ -5,6 +5,9 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+// Api routes are stored here
+var routesApi = require('./app_api/routes/index');
+
 var index = require('./routes/index');
 var users = require('./routes/users');
 
@@ -21,6 +24,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Use api routes in node's middle ware
+app.use('/api', routesApi);
 
 app.use('/', index);
 app.use('/users', users);
