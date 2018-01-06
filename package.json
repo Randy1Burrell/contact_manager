@@ -1,0 +1,19 @@
+{
+  "name": "contact_manager",
+  "version": "1.0.0",
+  "description": "No application used to manage contact lists",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Randy1Burrell/contact_manager.git"
+  },
+  "author": "Randy Burrell",
+  "license": "GPL-2.0",
+  "bugs": {
+    "url": "https://github.com/Randy1Burrell/contact_manager/issues"
+  },
+  "homepage": "https://github.com/Randy1Burrell/contact_manager#readme"
+}
