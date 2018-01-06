@@ -8,46 +8,49 @@ var router = express.Router();
  */
 
 var sendJsonResponse = function(res, status, content) {
-    res.status(status);
-    res.json(content);
+  res.status(status);
+  res.json(content);
 };
 
 
-var respObj = { name: "Randy", age: 33, address: "kng 6" }
+var respObj = {
+  name: "Randy",
+  age: 33,
+  address: "kng 6"
+}
 router.get(
   '/contact',
-  function(req, res){
+  function(req, res) {
     sendJsonResponse(res, 200, respObj);
   }
 );
 
 router.post(
-    '/contact',
-    function(req, res){
-      sendJsonResponse(res, 200, respObj);
-    }
+  '/contact',
+  function(req, res) {
+    sendJsonResponse(res, 200, respObj);
+  }
 );
 
 router.get(
   '/contact/:contactid',
-  function(req, res){
+  function(req, res) {
     sendJsonResponse(res, 200, respObj);
   }
 );
 
 router.put(
   '/contact/:contactid',
-  function(req, res){
+  function(req, res) {
     sendJsonResponse(res, 200, respObj);
   }
 );
 
 router.delete(
   '/contact/:contactid',
-  function(req, res){
+  function(req, res) {
     sendJsonResponse(res, 200, respObj);
   }
 );
 
 module.exports = router;
-
