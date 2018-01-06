@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/Randy1Burrell/contact_manager/issues"
   },
-  "homepage": "https://github.com/Randy1Burrell/contact_manager#readme"
+  "homepage": "https://github.com/Randy1Burrell/contact_manager#readme",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
 }
