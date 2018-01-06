@@ -12,23 +12,29 @@ var sendJsonResponse = function(res, status, content) {
     res.json(content);
 };
 
-// locations
+
+var respObj = { name: "Randy", age: 33, address: "kng 6" }
 router.get(
   '/contact',
   function(req, res){
-    var respObj = {
-      name: "Randy",
-      age: 33,
-      address: "kng 6"
+    sendJsonResponse(res, 200, respObj);
+  }
+);
+
+router.post(
+    '/contact',
+    function(req, res){
+      sendJsonResponse(res, 200, respObj);
     }
+);
+
+router.get(
+  '/contact/:contactid',
+  function(req, res){
     sendJsonResponse(res, 200, respObj);
   }
 );
 /*
-router.post(
-    '/locations',
-    ctrlLocations.locationsCreate
-);
 router.get(
     '/locations/:locationid',
     ctrlLocations.locationsReadOne
