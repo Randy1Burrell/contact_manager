@@ -5,6 +5,9 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+// Include database and its schemas in application
+require('./app_api/models/db.js');
+
 // Api routes are stored here
 var routesApi = require('./app_api/routes/index');
 
