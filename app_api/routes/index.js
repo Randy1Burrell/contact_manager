@@ -1,11 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-/*
- * var ctrlLocations = require('../controllers/locations');
- * var ctrlReviews = require('../controllers/reviews');
- * var ctrlAuth = require('../controllers/authentication');
- */
+var ctrlContacts = require('../controllers/contacts.js');
 
 var sendJsonResponse = function(res, status, content) {
   res.status(status);
@@ -13,44 +9,29 @@ var sendJsonResponse = function(res, status, content) {
 };
 
 
-var respObj = {
-  name: "Randy",
-  age: 33,
-  address: "kng 6"
-}
 router.get(
   '/contact',
-  function(req, res) {
-    sendJsonResponse(res, 200, respObj);
-  }
+  ctrlContacts.getContactList
 );
 
 router.post(
   '/contact',
-  function(req, res) {
-    sendJsonResponse(res, 200, respObj);
-  }
+  ctrlContacts.createContact
 );
 
 router.get(
   '/contact/:contactid',
-  function(req, res) {
-    sendJsonResponse(res, 200, respObj);
-  }
+  ctrlContacts.getContactInfo
 );
 
 router.put(
   '/contact/:contactid',
-  function(req, res) {
-    sendJsonResponse(res, 200, respObj);
-  }
+  ctrlContacts.updateContactInfo
 );
 
 router.delete(
   '/contact/:contactid',
-  function(req, res) {
-    sendJsonResponse(res, 200, respObj);
-  }
+  ctrlContacts.deleteContact
 );
 
 module.exports = router;
