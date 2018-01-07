@@ -54,5 +54,10 @@ mongoose.connect(dbURI);
  * has been made
  */
 mongoose.connection.on('connected', function() {
-  console.log('Mongoose connected to ' + dbURI);
-}):
+    console.log('Mongoose connected to ' + dbURI);
+  }):
+
+  /**
+   * Include necessary schema into database
+   */
+  require('contacts');
