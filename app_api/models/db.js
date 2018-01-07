@@ -42,3 +42,17 @@ if (process.env.NODE_ENV === 'production') {
     dbURI = 'mongodb://localhost/contacts';
   }
 }
+
+/**
+ * Try connecting to mongodb using
+ * the URI set in dbURI
+ */
+mongoose.connect(dbURI);
+
+/**
+ * Sends message to console if connection
+ * has been made
+ */
+mongoose.connection.on('connected', function() {
+  console.log('Mongoose connected to ' + dbURI);
+}):
