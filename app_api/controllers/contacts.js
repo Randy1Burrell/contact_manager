@@ -27,3 +27,19 @@ var respObj = {
 module.exports.getContactList = function(req, res) {
   sendJsonResponse(res, 200, respObj);
 }
+
+module.exports.createContact = function(req, res) {
+  sendJsonResponse(res, 200, respObj);
+}
+
+module.exports.getContactInfo = function(req, res) {
+  sendJsonResponse(res, 200, respObj);
+}
+
+module.exports.updateContactInfo = function(req, res) {
+  sendJsonResponse(res, 200, respObj);
+}
+
+module.exports.deleteContact = function(req, res) {
+  sendJsonResponse(res, 200, respObj);
+}
