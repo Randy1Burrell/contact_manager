@@ -27,20 +27,20 @@ var dbURI = 'mongodb://localhost/contacts';
  * for example NODE_ENV = production
  */
 if (process.env.NODE_ENV === 'production') {
-  if (process.env.MONGOLAB_URI) {
-    /**
-     * Setting dbURI to connection string
-     * that should be in .env files key
-     * value pair. MONGOLAB_URI = URI
-     */
-    dbURI = process.env.MONGOLAB_URI;
-  } else {
-    /**
-     * If MONGOLAB_URI was not set in .env
-     * file then revert to default URI
-     */
-    dbURI = 'mongodb://localhost/contacts';
-  }
+    if (process.env.MONGOLAB_URI) {
+        /**
+         * Setting dbURI to connection string
+         * that should be in .env files key
+         * value pair. MONGOLAB_URI = URI
+         */
+        dbURI = process.env.MONGOLAB_URI;
+    } else {
+        /**
+         * If MONGOLAB_URI was not set in .env
+         * file then revert to default URI
+         */
+        dbURI = 'mongodb://localhost/contacts';
+    }
 }
 
 /**
@@ -55,9 +55,9 @@ mongoose.connect(dbURI);
  */
 mongoose.connection.on('connected', function() {
     console.log('Mongoose connected to ' + dbURI);
-  }):
+});
 
-  /**
-   * Include necessary schema into database
-   */
-  require('contacts');
+/**
+ * Include necessary schema into database
+ */
+require('./contacts');
