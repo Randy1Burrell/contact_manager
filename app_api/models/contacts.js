@@ -28,9 +28,9 @@ var contactSchema = new mongoose.Schema({
   dob: {
     type: Date,
   },
-  address: [{
-    type: String
-  }],
+  address: {
+    type: [String]
+  },
   phoneNumber: {
     type: [String],
     required: true
@@ -44,4 +44,4 @@ var contactSchema = new mongoose.Schema({
 /**
  * Compile contactSchema
  */
-mongoose.model('Contact', contactSchema);
+mongoose.model('contacts', contactSchema, 'contacts');
