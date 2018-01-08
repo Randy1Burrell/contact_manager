@@ -1,4 +1,13 @@
 /**
+ * Author: Randy Burrell
+ *
+ * Date Created: 2018-01-06 YYYY-MM-DD
+ *
+ * Description: this file is the entry point
+ * to the API's database scheme
+ */
+
+/**
  * Require dependencies
  */
 var mongoose = require('mongoose');
