@@ -24,9 +24,9 @@ var badRequest = {
       "firstname": "string - required",
       "lastname": "string - required",
       "address": "array of string",
-      "dob": "date of birth",
-      "phoneNumber": "array of phone numbers -- required",
-      "email": "array of email required"
+      "dob": "date of birth must be Date",
+      "phoneNumber": "String of unique phone numbers space separated is required",
+      "email": "String of unique emails spaces separated is required"
     }
   }
 };
@@ -46,6 +46,14 @@ var sendJsonResponse = function(res, status, content) {
   res.status(status);
   res.json(content);
 };
+/**
+ * Checks is elements occur more than onces in array.
+ * Will be used to ensure the a person's number only
+ * occurs once when saving.
+ */
+var hasDuplicates = function(array) {
+  return (new Set(array)).size !== array.length;
+}
 
 /**
  * Used to parse request body for creatContact
@@ -112,9 +120,7 @@ var parseReqBody = function(req) {
  */
 var phoneNumberValidation = function(p_number) {
   var bad = false;
-  var phoneNumber = [];
-  phoneNumber = p_number.split(' ');
-  phoneNumber.forEach(function(number) {
+  p_number.forEach(function(number) {
     number = number.replace(/[^\d]/g, '');
     if (number.length < 6 || number.length > 12) {
       bad = true;
@@ -128,9 +134,7 @@ var phoneNumberValidation = function(p_number) {
  */
 var emailValidation = function(email) {
   var bad = false;
-  var eMail = [];
-  eMail = email.split(' ');
-  eMail.forEach(function(email_address) {
+  email.forEach(function(email_address) {
     if (!(/[\w.+-]+@[\w.+-]+\.[a-zA-Z0-9]{2,4}(,\s*)*/ig.test(email_address))) {
       console.log(email_address);
       bad = true;
@@ -144,21 +148,19 @@ var emailValidation = function(email) {
  */
 var contactCreator = function(req, res) {
   // Check if address has been given
-  var address = '';
-  if (req.body.address == null) {
-    address = '';
-  } else {
-    address = req.body.address;
-  }
+  var address = (req.body.address) ? req.body.address : '';
+  // Check if dob has been given
+  var dob = (req.body.dob) ? new Date(req.body.dob) : '';
   // Create contact when all checks have been passed
   contact
     .create({
-        firstname: req.body.firstname,
-        lastname: req.body.lastname,
-        phoneNumber: req.body.phoneNumber.split(' '),
-        address: address.split(','),
-        email: req.body.email.split(' ')
-      }, // Supply required callback to mongoose.create
+      firstname: req.body.firstname,
+      lastname: req.body.lastname,
+      phoneNumber: req.body.phoneNumber.split(' '),
+      address: address.split(','),
+      dob: dob,
+      email: req.body.email.split(' ')
+    }, // Supply required callback to mongoose.create
       function(err, result) {
         /**
          * On error send error response
@@ -192,15 +194,17 @@ var contactCreateUpdate = function(req, res, option) {
      * Make check for all required arguments
      */
     var requestValidation = parseReqBody(req);
+    var phoneNumber = req.body.phoneNumber.split(' ');
+    var email = req.body.email.split(' ');
     if (requestValidation.bad) {
       // Send appropriate response
       badRequest.message = 'Missing are ' + requestValidation.message;
       sendJsonResponse(res, 400, badRequest);
-    } else if (phoneNumberValidation(req.body.phoneNumber) === true) {
+    } else if (phoneNumberValidation(phoneNumber) || hasDuplicates(phoneNumber)) {
       // Send appropriate response in phone number is invalid
       badRequest.message = 'Phone number is invalid';
       sendJsonResponse(res, 400, badRequest);
-    } else if (emailValidation(req.body.email)) {
+    } else if (emailValidation(email) || hasDuplicates(email)) {
       // Send appropriate response on invalid email
       badRequest.message = "Email is incorrect";
       sendJsonResponse(res, 400, badRequest);
@@ -231,12 +235,9 @@ var updateContact = function(req, res) {
     sendJsonResponse(res, 404, notFound);
   } else {
     // Check if address has been given
-    var address = '';
-    if (req.body.address == null) {
-      address = '';
-    } else {
-      address = req.body.address;
-    }
+    var address = (req.body.address) ? req.body.address.split(',') : '';
+    // Check if dob has been given
+    var dob = (req.body.dob) ? new Date(req.body.dob) : '';
     // Updae contact
     contact
       .findById(req.params.contactid)
@@ -250,7 +251,8 @@ var updateContact = function(req, res) {
           contact.firstname = req.body.firstname;
           contact.lastname = req.body.lastname;
           contact.phoneNumber = req.body.phoneNumber.split(' ');
-          contact.address = address.split(',');
+          contact.address = address;
+          contact.dob = dob;
           contact.email = req.body.email.split(' ');
 
           contact.save(function(err, contact) {
@@ -289,11 +291,11 @@ module.exports.getContactList = function(req, res) {
    * Find all contacts in database
    */
   contact.
-  find({}).
-  sort({
-    firstname: 1
-  }).
-  exec(contactList);
+    find({}).
+    sort({
+      firstname: 1
+    }).
+    exec(contactList);
 }
 
 module.exports.createContact = function(req, res) {
