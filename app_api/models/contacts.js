@@ -27,16 +27,20 @@ var contactSchema = new mongoose.Schema({
   },
   dob: {
     type: Date,
+    default: ''
   },
   address: {
-    type: [String]
+    type: [String],
+    default: '',
   },
   phoneNumber: {
     type: [String],
+    unique: true,
     required: true
   },
   email: {
     type: [String],
+    unique: true,
     required: true
   },
 });
