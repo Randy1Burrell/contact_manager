@@ -154,13 +154,13 @@ var contactCreator = function(req, res) {
   // Create contact when all checks have been passed
   contact
     .create({
-      firstname: req.body.firstname,
-      lastname: req.body.lastname,
-      phoneNumber: req.body.phoneNumber.split(' '),
-      address: address,
-      dob: dob,
-      email: req.body.email.split(' ')
-    }, // Supply required callback to mongoose.create
+        firstname: req.body.firstname,
+        lastname: req.body.lastname,
+        phoneNumber: req.body.phoneNumber.split(' '),
+        address: address,
+        dob: dob,
+        email: req.body.email.split(' ')
+      }, // Supply required callback to mongoose.create
       function(err, result) {
         /**
          * On error send error response
@@ -283,11 +283,11 @@ module.exports.getContactList = function(req, res) {
    * Find all contacts in database
    */
   contact.
-    find({}).
-    sort({
-      firstname: 1
-    }).
-    exec(contactList);
+  find({}).
+  sort({
+    firstname: 1
+  }).
+  exec(contactList);
 }
 
 module.exports.createContact = function(req, res) {
