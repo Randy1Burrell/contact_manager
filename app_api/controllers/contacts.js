@@ -142,7 +142,7 @@ var emailValidation = function(email) {
 /**
  * function used to create contact
  */
-var contactCreator = function(res, req) {
+var contactCreator = function(req, res) {
   // Check if address has been given
   var address = '';
   if (req.body.address == null) {
@@ -153,12 +153,12 @@ var contactCreator = function(res, req) {
   // Create contact when all checks have been passed
   contact
     .create({
-        firstname: req.body.firstname,
-        lastname: req.body.lastname,
-        phoneNumber: req.body.phoneNumber.split(' '),
-        address: address.split(' '),
-        email: req.body.email.split(' ')
-      }, // Supply required callback to mongoose.create
+      firstname: req.body.firstname,
+      lastname: req.body.lastname,
+      phoneNumber: req.body.phoneNumber.split(' '),
+      address: address.split(','),
+      email: req.body.email.split(' ')
+    }, // Supply required callback to mongoose.create
       function(err, result) {
         /**
          * On error send error response
@@ -170,40 +170,16 @@ var contactCreator = function(res, req) {
           sendJsonResponse(res, 201, result);
         }
       });
-}
-
-/**
- * Dummy data for testing
- */
-var respObj = {
-  name: "Randy",
-  age: 33,
-  address: "kng 6"
 };
-/**
- * Controller for getting contacts
- */
-module.exports.getContactList = function(req, res) {
-  /**
-   * Contact list response controller
-   */
-  var contactList = function(err, results, status) {
-    if (err) {} else {
-      sendJsonResponse(res, 200, results);
-    }
-  };
-  /**
-   * Find all contacts in database
-   */
-  contact.
-  find({}).
-  sort({
-    firstname: 1
-  }).
-  exec(contactList);
-}
 
-module.exports.createContact = function(req, res) {
+/**
+ * function used to dynamically
+ * create or update contact
+ * pass parameter 0 to create contact
+ * or 1 to update contact as the option
+ * param
+ */
+var contactCreateUpdate = function(req, res, option) {
   /**
    * Send bad request response if required
    * arguments have not bee received
@@ -229,10 +205,98 @@ module.exports.createContact = function(req, res) {
       badRequest.message = "Email is incorrect";
       sendJsonResponse(res, 400, badRequest);
     } else {
-      // Create contact
-      contactCreator(res, req);
+      switch (option) {
+        case 0:
+          // Create contact
+          contactCreator(req, res);
+          break;
+        case 1:
+          // Update contact info
+          updateContact(req, res);
+          break;
+        default:
+          // Send bad request
+          badRequest.message = "Invalid Create OR Update Request";
+          sendJsonResponse(res, 404, badRequest);
+      }
     }
   }
+};
+
+/**
+ * Function used to update contact
+ */
+var updateContact = function(req, res) {
+  if (!req.params.contactid) {
+    sendJsonResponse(res, 404, notFound);
+  } else {
+    // Check if address has been given
+    var address = '';
+    if (req.body.address == null) {
+      address = '';
+    } else {
+      address = req.body.address;
+    }
+    // Updae contact
+    contact
+      .findById(req.params.contactid)
+      .select('firstname')
+      .exec(function(err, contact) {
+        if (!contact) {
+          sendJsonResponse(res, 404, notFound);
+        } else if (err) {
+          sendJsonResponse(res, 400, err);
+        } else {
+          contact.firstname = req.body.firstname;
+          contact.lastname = req.body.lastname;
+          contact.phoneNumber = req.body.phoneNumber.split(' ');
+          contact.address = address.split(',');
+          contact.email = req.body.email.split(' ');
+
+          contact.save(function(err, contact) {
+            if (err) {
+              sendJsonResponse(res, 400, err);
+            } else {
+              sendJsonResponse(res, 200, contact);
+            }
+          });
+        }
+      });
+  }
+};
+/**
+ * Dummy data for testing
+ */
+var respObj = {
+  name: "Randy",
+  age: 33,
+  address: "kng 6"
+};
+/**
+ * Controller for getting contacts
+ */
+module.exports.getContactList = function(req, res) {
+  /**
+   * Contact list response controller
+   */
+  var contactList = function(err, results, status) {
+    if (err) {} else {
+      sendJsonResponse(res, 200, results);
+    }
+  };
+  /**
+   * Find all contacts in database
+   */
+  contact.
+    find({}).
+    sort({
+      firstname: 1
+    }).
+    exec(contactList);
+}
+
+module.exports.createContact = function(req, res) {
+  contactCreateUpdate(req, res, 0);
 }
 
 module.exports.getContactInfo = function(req, res) {
@@ -249,7 +313,7 @@ module.exports.getContactInfo = function(req, res) {
             "message": "Requested contact info was not found"
           });
         } else if (err) {
-          sendJsonResponse(res, 404, err);
+          sendJsonResponse(res, 400, err);
         } else {
           sendJsonResponse(res, 200, contact);
         }
@@ -260,7 +324,7 @@ module.exports.getContactInfo = function(req, res) {
 }
 
 module.exports.updateContactInfo = function(req, res) {
-  sendJsonResponse(res, 200, respObj);
+  contactCreateUpdate(req, res, 1);
 }
 
 module.exports.deleteContact = function(req, res) {
