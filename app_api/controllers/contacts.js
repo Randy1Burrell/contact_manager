@@ -153,12 +153,12 @@ var contactCreator = function(req, res) {
   // Create contact when all checks have been passed
   contact
     .create({
-      firstname: req.body.firstname,
-      lastname: req.body.lastname,
-      phoneNumber: req.body.phoneNumber.split(' '),
-      address: address.split(','),
-      email: req.body.email.split(' ')
-    }, // Supply required callback to mongoose.create
+        firstname: req.body.firstname,
+        lastname: req.body.lastname,
+        phoneNumber: req.body.phoneNumber.split(' '),
+        address: address.split(','),
+        email: req.body.email.split(' ')
+      }, // Supply required callback to mongoose.create
       function(err, result) {
         /**
          * On error send error response
@@ -264,6 +264,7 @@ var updateContact = function(req, res) {
       });
   }
 };
+
 /**
  * Dummy data for testing
  */
@@ -288,11 +289,11 @@ module.exports.getContactList = function(req, res) {
    * Find all contacts in database
    */
   contact.
-    find({}).
-    sort({
-      firstname: 1
-    }).
-    exec(contactList);
+  find({}).
+  sort({
+    firstname: 1
+  }).
+  exec(contactList);
 }
 
 module.exports.createContact = function(req, res) {
@@ -328,5 +329,21 @@ module.exports.updateContactInfo = function(req, res) {
 }
 
 module.exports.deleteContact = function(req, res) {
-  sendJsonResponse(res, 200, respObj);
+  if (!req.params.contactid) {
+    sendJsonResponse(res, 400, {
+      "message": "Contactid param is required"
+    });
+  } else {
+    contact
+      .findByIdAndRemove(req.params.contactid)
+      .exec(function(err, contact) {
+        if (!contact) {
+          sendJsonResponse(res, 404, notFound);
+        } else if (err) {
+          sendJsonResponse(res, 400, err);
+        } else {
+          sendJsonResponse(res, 204, null);
+        }
+      });
+  }
 }
