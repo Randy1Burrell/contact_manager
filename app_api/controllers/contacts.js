@@ -3,8 +3,9 @@
  *
  * Date Created: 2018-01-06 YYYY-MM-DD
  *
- * Description: this file is the entry point
- * to the API's database scheme
+ * Description: This file hold the controllers
+ * for creating, upating, deleting and retrieving
+ * contacts
  */
 
 /**
