@@ -138,6 +138,7 @@ var emailValidation = function(email) {
   });
   return bad;
 };
+
 /**
  * function used to create contact
  */
