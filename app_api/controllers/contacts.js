@@ -148,7 +148,7 @@ var emailValidation = function(email) {
  */
 var contactCreator = function(req, res) {
   // Check if address has been given
-  var address = (req.body.address) ? req.body.address : '';
+  var address = (req.body.address) ? req.body.address.split(',') : '';
   // Check if dob has been given
   var dob = (req.body.dob) ? new Date(req.body.dob) : '';
   // Create contact when all checks have been passed
@@ -157,7 +157,7 @@ var contactCreator = function(req, res) {
       firstname: req.body.firstname,
       lastname: req.body.lastname,
       phoneNumber: req.body.phoneNumber.split(' '),
-      address: address.split(','),
+      address: address,
       dob: dob,
       email: req.body.email.split(' ')
     }, // Supply required callback to mongoose.create
