@@ -139,6 +139,39 @@ var emailValidation = function(email) {
   return bad;
 };
 /**
+ * function used to create contact
+ */
+var contactCreator = function(res, req) {
+  // Check if address has been given
+  var address = '';
+  if (req.body.address == null) {
+    address = '';
+  } else {
+    address = req.body.address;
+  }
+  // Create contact when all checks have been passed
+  contact
+    .create({
+        firstname: req.body.firstname,
+        lastname: req.body.lastname,
+        phoneNumber: req.body.phoneNumber.split(' '),
+        address: address.split(' '),
+        email: req.body.email.split(' ')
+      }, // Supply required callback to mongoose.create
+      function(err, result) {
+        /**
+         * On error send error response
+         * else return newly created object
+         */
+        if (err) {
+          sendJsonResponse(res, 400, err);
+        } else {
+          sendJsonResponse(res, 201, result);
+        }
+      });
+}
+
+/**
  * Dummy data for testing
  */
 var respObj = {
@@ -195,33 +228,8 @@ module.exports.createContact = function(req, res) {
       badRequest.message = "Email is incorrect";
       sendJsonResponse(res, 400, badRequest);
     } else {
-      // Check if address has been given
-      var address = '';
-      if (req.body.address == null) {
-        address = '';
-      } else {
-        address = req.body.address;
-      }
-      // Create contact when all checks have been passed
-      contact
-        .create({
-            firstname: req.body.firstname,
-            lastname: req.body.lastname,
-            phoneNumber: req.body.phoneNumber.split(' '),
-            address: address.split(' '),
-            email: req.body.email.split(' ')
-          }, // Supply required callback to mongoose.create
-          function(err, result) {
-            /**
-             * On error send error response
-             * else return newly created object
-             */
-            if (err) {
-              sendJsonResponse(res, 400, err);
-            } else {
-              sendJsonResponse(res, 201, result);
-            }
-          });
+      // Create contact
+      contactCreator(res, req);
     }
   }
 }
