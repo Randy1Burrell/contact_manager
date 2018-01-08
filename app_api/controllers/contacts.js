@@ -246,9 +246,7 @@ module.exports.getContactInfo = function(req, res) {
         }
       });
   } else {
-    sendJsonResponse(res, 404, {
-      "message": "There was no contactid in the request"
-    });
+    sendJsonResponse(res, 404, notFound);
   }
 }
 
