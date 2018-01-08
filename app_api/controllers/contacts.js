@@ -193,30 +193,53 @@ module.exports.createContact = function(req, res) {
         address = req.body.address;
       }
       // Create contact when all checks have been passed
-      contact.create({
-          firstname: req.body.firstname,
-          lastname: req.body.lastname,
-          phoneNumber: req.body.phoneNumber.split(' '),
-          address: address.split(' '),
-          email: req.body.email.split(' ')
-        }, // Supply required callback to mongoose.create
-        function(err, result) {
-          /**
-           * On error send error response
-           * else return newly created object
-           */
-          if (err) {
-            sendJsonResponse(res, 400, err);
-          } else {
-            sendJsonResponse(res, 201, result);
-          }
-        });
+      contact
+        .create({
+            firstname: req.body.firstname,
+            lastname: req.body.lastname,
+            phoneNumber: req.body.phoneNumber.split(' '),
+            address: address.split(' '),
+            email: req.body.email.split(' ')
+          }, // Supply required callback to mongoose.create
+          function(err, result) {
+            /**
+             * On error send error response
+             * else return newly created object
+             */
+            if (err) {
+              sendJsonResponse(res, 400, err);
+            } else {
+              sendJsonResponse(res, 201, result);
+            }
+          });
     }
   }
 }
 
 module.exports.getContactInfo = function(req, res) {
-  sendJsonResponse(res, 200, respObj);
+  /**
+   * Check for required request parameter
+   * contactid
+   */
+  if (req.params && req.params.contactid) {
+    contact
+      .findById(req.params.contactid)
+      .exec(function(err, contact) {
+        if (!contact) {
+          sendJsonResponse(res, 404, {
+            "message": "Requested contact info was not found"
+          });
+        } else if (err) {
+          sendJsonResponse(res, 404, err);
+        } else {
+          sendJsonResponse(res, 200, contact);
+        }
+      });
+  } else {
+    sendJsonResponse(res, 404, {
+      "message": "There was no contactid in the request"
+    });
+  }
 }
 
 module.exports.updateContactInfo = function(req, res) {
