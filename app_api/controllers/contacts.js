@@ -268,14 +268,6 @@ var updateContact = function(req, res) {
 };
 
 /**
- * Dummy data for testing
- */
-var respObj = {
-  name: "Randy",
-  age: 33,
-  address: "kng 6"
-};
-/**
  * Controller for getting contacts
  */
 module.exports.getContactList = function(req, res) {
