@@ -4,6 +4,7 @@ logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+.DS_Store
 
 # Runtime data
 pids
@@ -59,3 +60,13 @@ typings/
 
 # ignore my vi session file
 .application-files
+
+# ignore dist output directory in app client
+app_client/dist/
+
+# Editor directories and files
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
