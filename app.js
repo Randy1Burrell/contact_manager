@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var cors = require('cors');
 
 // Include database and its schemas in application
 require('./app_api/models/db.js');
@@ -29,6 +30,8 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(cors());
 
 // Use api routes in node's middle ware
 app.use('/api', routesApi);
