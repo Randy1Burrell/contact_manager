@@ -60,7 +60,7 @@ typings/
 
 # ignore my vi session file
 .application-files
-
+*.vim
 # ignore dist output directory in app client
 app_client/dist/
 
@@ -70,3 +70,4 @@ app_client/dist/
 *.ntvs*
 *.njsproj
 *.sln
+
