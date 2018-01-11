@@ -95,11 +95,15 @@ a .input-group input {
 }
 
 /**
- * Style the links inside tbhe navigation bar
+ * Style the inputs inside tbhe navigation bar
  */
 .topnav a, input[type="text"] {
   font-variant    : all-petite-caps;
 }
+
+/**
+ * Style the links inside tbhe navigation bar
+ */
 .topnav a {
   color           : $green;
   display         : block;
@@ -123,10 +127,6 @@ a .input-group input {
   min-width      : 500px;
   padding-bottom : 7px;
   padding-top    : 10px;
-}
-
-.topnav p {
-  width : 20%;
 }
 
 /**
