@@ -15,6 +15,12 @@
     <a href="javascript:void(0);" class="" @click="">
       <i class="fa fa-plus-circle" aria-hidden="true"></i>
     </a>
+    <a href="javascript:void(0);" class="helpers" @click="">
+      <i class="fa fa-cog" aria-hidden="true"></i>
+    </a>
+    <a href="javascript:void(0);" class="helpers" @click="">
+      <i class="fa fa-question-circle" aria-hidden="true"></i>
+    </a>
     <a href="javascript:void(0);" class="active icon" @click="openSearch()">
       <i class="fa fa-search" aria-hidden="true"></i>
     </a>
@@ -71,6 +77,13 @@ a .input-group input {
   outline            : none !important;
   -webkit-appearance : none;
   box-shadow         : 0px 0px;
+}
+
+/**
+ * Put help buttons on the right
+ */
+.helpers {
+  float : right !important;
 }
 
 /**
@@ -140,20 +153,20 @@ a .input-group input {
  * contains should open and close the topnav
  * (.icon)
  */
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 991px) {
   /**
    * Default setting for text box
    */
 input[type="text"] {
-  max-width : 500px !important;
+  max-width : 991px !important;
   min-width : 250px !important;
 }
 
 /**
  * Remove input button on small scrrens
  */
-.input-group-btn{
-  display : none;
+.input-group-btn, .helpers{
+  display : none !important;
 }
 
 /**
@@ -185,7 +198,11 @@ input[type="text"] {
  */
 .topnav a:nth-child(3) {
   background-color : $hover-background;
-  padding-left     : 0px;
+  padding-left     : 2px;
+  padding-right    : 2px;
+  width            : 100%;
+  min-width        : 320px;
+  max-width        : 991px;
 }
 /**
  * Remove the fourth anchor
