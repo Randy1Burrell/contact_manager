@@ -1,8 +1,8 @@
 <template>
-  <div class="topnav" id="myTopnav">
-    <a href="#home" class="active">&#9776;</a>
+  <div :class="{topnav: true, responsive: search}" id="myTopnav">
+    <a href="javascript:void(0);" @click.prevent="toggleNav()" class="active">&#9776;</a>
     <a>Contact Manager</a>
-    <a>
+    <a href="javascript:void(0);">
       <div class="input-group">
         <span class="input-group-btn">
           <button class="btn btn-default" type="button">
@@ -12,22 +12,24 @@
         <input type="text" class="form-control" placeholder="Search Contacts">
       </div>
     </a>
-    <a href="javascript:void(0);" class="" @click="">
+    <a href="javascript:void(0);">
       <i class="fa fa-plus-circle" aria-hidden="true"></i>
     </a>
-    <a href="javascript:void(0);" class="helpers" @click="">
+    <a href="javascript:void(0);" class="helpers">
       <i class="fa fa-cog" aria-hidden="true"></i>
     </a>
-    <a href="javascript:void(0);" class="helpers" @click="">
+    <a href="javascript:void(0);" class="helpers">
       <i class="fa fa-question-circle" aria-hidden="true"></i>
     </a>
-    <a href="javascript:void(0);" class="active icon" @click="openSearch()">
+    <a href="javascript:void(0);" class="active icon" @click.prevent="search = !search">
       <i class="fa fa-search" aria-hidden="true"></i>
     </a>
   </div>
 </template>
 
 <script>
+import {sideNav} from '../bus/navigation'
+
 export default {
   name: 'navigation',
   data() {
@@ -42,23 +44,35 @@ export default {
      * class to topnav when the user
      * clicks on the icon
      */
-    openSearch : () => {
-      var x = document.getElementById("myTopnav");
-      if (x.className === "topnav") {
-        x.className += " responsive";
-      } else {
-        x.className = "topnav";
-      }
+    toggleSearch : () => {
+      this.search = !this.search;
+    },
+    /**
+     * Emits event to sideNav bus to
+     * toggle side navigation bar on
+     * and off the screen
+     */
+    toggleNav : () => {
+      sideNav.$emit("toggleSideNav", !open);
     }
+  },
+  props : {
+    open : {
+      type: Boolean
+    }
+  },
+  created () {
   }
 }
 </script>
+
 <style lang="scss" scoped>
 /**
- * Style for search bar
+ * Colors for search bar
  */
 $green            : #4caf50;
 $hover-background : #ddd;
+$bg-color         : #333;
 
 button {
   color            : $green;
@@ -73,12 +87,6 @@ a .input-group input {
   border         : 0px;
 }
 
-*:focus {
-  outline            : none !important;
-  -webkit-appearance : none;
-  box-shadow         : 0px 0px;
-}
-
 /**
  * Put help buttons on the right
  */
@@ -90,8 +98,11 @@ a .input-group input {
  * Add a black background color to the top navigation
  */
 .topnav {
-  background-color : #333;
+  background-color : $bg-color;
   overflow         : hidden;
+  position         : fixed !important;
+  width            : 100%;
+  z-index          : 1;
 }
 
 /**
@@ -190,7 +201,7 @@ input[type="text"] {
  * Keep current background-color
  */
 .topnav a:nth-child(2):hover{
-  background-color : #333;
+  background-color : $bg-color;
 }
 /**
  * Give search bar hover background
