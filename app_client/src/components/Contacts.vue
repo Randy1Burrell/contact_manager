@@ -1,30 +1,33 @@
 <template>
-  <p> {{ contact.firstname }} {{ contact.lastname }}
-  <a href="#" @click.prevent="view=!view">
-    <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
-  </a>
-  <a href="">
-    <i class="fa fa-pencil" aria-hidden="true"></i>
-  </a>
-  <a href="">
-    <i class="fa fa-phone" aria-hidden="true"></i>
-  </a>
-  </p>
+  <div>
+  <div class="chip" v-for="i in 3000">
+    <img src="https://www.randyburrell.info/wp-content/uploads/2017/05/Randy_Burrell_Graduation_Picture.jpg" alt="Person" width="96" height="96">
+    John Doe
+    <span class="closebtn" onclick="this.parentElement.style.display='none'">&times;</span>
+  </div>
+  </div>
 </template>
 
 <script>
+import {sideNav} from '../bus/navigation'
+
 export default {
   name: 'Contacts',
   props: {
     contact: {
       type: Object,
-      required: true
+      //required: true
     }
   },
   data () {
     return {
       view: false
     }
+  },
+  created () {
+    sideNav.$on("openNav", (event) => {
+      this.small = event;
+    });
   }
 }
 </script>
