@@ -1,62 +1,60 @@
 <template>
   <div id="app">
-    <app-navbar></app-navbar>
-    <app-side-bar></app-side-bar>
-    <div class="col-md-4" v-for="contact in  contacts">
-      <app-contacts :contact="contact"></app-contacts>
-    </div>
-    <a class="add-contact">
-      <i class="fa fa-plus" aria-hidden="true"></i>
-    </a>
+    <app-navbar v-on:open="open"></app-navbar>
+    <app-sidebar v-bind:open="open"></app-sidebar>
+    <app-contacts></app-contacts>
   </div>
 </template>
 
 <script>
+
+import {sideNav} from './bus/navigation'
 import Contacts from './components/Contacts.vue'
-import Navbar from './components/Navbar.vue'
 import Sidebar from './components/Sidebar.vue'
+import Navbar from './components/Navbar.vue'
 export default {
   components: {
-    'app-contacts': Contacts,
-    'app-navbar': Navbar,
-    'app-sidebar': Sidebar
+    'app-contacts' : Contacts,
+    'app-sidebar'  : Sidebar,
+    'app-navbar'   : Navbar
   },
   name: 'app',
   data () {
     return {
-      msg: "Contacts List",
-      contacts: []
+      msg:       "Contacts List",
+      contacts:  [],
+      open: false
     }
+  },
+  methods: {
   },
   created() {
     this.$http.get('http://localhost:3000/api/contact/').then((data) => {
       this.contacts = data.body;
+      sideNav.$on("toggleSideNav", (event) => {
+        this.open = !this.open;
+      });
     });
   }
 }
 </script>
 
 <style lang="scss">
-body {
-  padding-top: 60px;
+.body, html {
+  height: 100%;
 }
-h1 {
-  max-width: 200px;
-  margin: auto;
-  font-size: 10px;
+
+/**
+ * Remove outline and box-shadow
+ * from all elements on focus.
+ */
+*:focus {
+  outline            : none !important;
+  -webkit-appearance : none !important;
+  box-shadow         : 0px 0px !important;
 }
-.add-contact{
-  border: 1px solid #09cfc0;
-  padding: 12px 23px;
-  color: #fff !important;
-  font-weight: bolder;
-  background-color: #09cfc0;
-  position: absolute;
-  bottom: 40px;
-  right: 40px;
-  line-height: 2;
-}
-#app {
-  padding-top: 30px;
+
+* {
+    box-sizing: border-box !important;
 }
 </style>
