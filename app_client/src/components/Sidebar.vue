@@ -1,14 +1,29 @@
 <template>
-  <div id="mySidenav" :class="{sidenav: true, 'open-nav': !open, 'close-nav': open}">
+  <div id="mySidenav" :class="{sidenav: true, 'open-nav': !openNav, 'close-nav': openNav}">
     <a href="javascript:void(0)" class="closebtn" @click.prevent="closeNav()">
       <i class="fa fa-angle-double-left" aria-hidden="true"></i>
     </a>
     <a href="#">
       <i class="fa fa-address-book" aria-hidden="true"></i> Contacts <span class="badge badge-success">30</span>
     </a>
-    <a href="#"><i aria-hidden="true" class="fa fa-plus-circle"></i> New</a>
-    <a href="#"><i data-v-46725f86="" aria-hidden="true" class="fa fa-cog"></i> Settings</a>
-    <a href="#"><i data-v-46725f86="" aria-hidden="true" class="fa fa-question-circle"></i> Help</a>
+    <a href="#">
+      <i aria-hidden="true" class="fa fa-plus-circle"></i>
+      New
+    </a>
+    <a href="#">
+      <i data-v-46725f86="" aria-hidden="true" class="fa fa-cog"></i>
+      Settings
+    </a>
+    <div v-if="settings" :class="{show: settings}">
+      <h1>Settings</h1>
+    </div>
+    <a href="#">
+      <i data-v-46725f86="" aria-hidden="true" class="fa fa-question-circle"></i>
+      Help
+    </a>
+    <div v-if="help" :class="{show: help}">
+      <h1>Help</h1>
+    </div>
   </div>
 </template>
 
@@ -19,26 +34,26 @@ export default {
   name: 'Sidebar',
   data () {
     return {
-      close: open,
     }
   },
   methods: {
     closeNav : () => {
-      sideNav.$emit("toggleSideNav", !open);
+      sideNav.$emit("toggleSideNav", true);
     },
   },
   props: {
-    open: {
-      type: Boolean,
-      required: true
+    openNav: {
+      type     : Boolean,
+      required : true
+    },
+    help: {
+      type: Boolean
+    },
+    settings: {
+      type: Boolean
     }
   },
   created() {
-    sideNav.$on("openNav", (event) => {
-    });
-    sideNav.$on("closeNav", (event) => {
-      this.close = event;
-    });
   }
 }
 
@@ -54,18 +69,28 @@ $green            : #4caf50;
   border-radius: 50%;
 }
 
+/**
+ * Class to show div
+ */
+.show {
+  width: 100%;
+}
+
 .sidenav {
-  height           : 100%;
-  position         : fixed;
-  margin-top       : 52px;
-  z-index          : auto;
-  width            : 0; /* 0 width - change this with JavaScript */
-  z-index          : 0; /* Stay on top */
-  top              : 0; /* Stay at the top */
-  left             : 0;
-  background-color : #333;/* Black*/
-  overflow-x       : hidden; /* Disable horizontal scroll */
-  transition       : 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+  height                     : 100%;
+  position                   : fixed;
+  margin-top                 : 52px;
+  z-index                    : auto;
+  width                      : 0; /* 0 width - change this with JavaScript */
+  z-index                    : 0; /* Stay on top */
+  top                        : 0; /* Stay at the top */
+  left                       : 0;
+  background-color           : #333;/* Black*/
+  overflow-x                 : hidden; /* Disable horizontal scroll */
+  transition                 : 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+  transition-timing-function : ease-in-out;
+  transition-delay           : 1s;
+  -webkit-transition         : 0.5s;
 }
 
 /* The navigation menu links */
