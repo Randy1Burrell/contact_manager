@@ -1,7 +1,12 @@
 <template>
   <div id="app">
     <app-navbar v-on:open="open"></app-navbar>
-    <app-sidebar v-bind:open="open"></app-sidebar>
+
+    <app-sidebar v-bind:open="open"
+      v-bind:help="help"
+      v-bind:settings="settings">
+    </app-sidebar>
+
     <app-contacts></app-contacts>
   </div>
 </template>
@@ -23,7 +28,10 @@ export default {
     return {
       msg:       "Contacts List",
       contacts:  [],
-      open: false
+      help: false,
+      open: false,
+      newCon: false,
+      settings: false
     }
   },
   methods: {
@@ -31,9 +39,22 @@ export default {
   created() {
     this.$http.get('http://localhost:3000/api/contact/').then((data) => {
       this.contacts = data.body;
-      sideNav.$on("toggleSideNav", (event) => {
-        this.open = !this.open;
-      });
+    });
+    // Toggle sidebar when event is received
+    sideNav.$on("toggleSideNav", (event) => {
+      this.open = !this.open;
+    });
+    // Toggle settings when event is received
+    sideNav.$on("toggleSettings", (event) => {
+      this.settings = !this.settings;
+    });
+    // Toggle help when event is received
+    sideNav.$on("toggleHelp", (event) => {
+      this.help = !this.help;
+    });
+    // Toggle new when event is received
+    sideNav.$on("toggleNew", (event) => {
+      this.newCon = !this.newCon;
     });
   }
 }
@@ -55,6 +76,6 @@ export default {
 }
 
 * {
-    box-sizing: border-box !important;
+  box-sizing: border-box !important;
 }
 </style>
