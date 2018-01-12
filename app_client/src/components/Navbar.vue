@@ -12,13 +12,13 @@
         <input type="text" class="form-control" placeholder="Search Contacts">
       </div>
     </a>
-    <a href="javascript:void(0);">
+    <a href="javascript:void(0);" @click.prevent="toggleNew()">
       <i class="fa fa-plus-circle" aria-hidden="true"></i>
     </a>
-    <a href="javascript:void(0);" class="helpers">
+    <a href="javascript:void(0);" @click.prevent="toggleSettings()" class="helpers">
       <i class="fa fa-cog" aria-hidden="true"></i>
     </a>
-    <a href="javascript:void(0);" class="helpers">
+    <a href="javascript:void(0);" @click.prevent="toggleHelp()" class="helpers">
       <i class="fa fa-question-circle" aria-hidden="true"></i>
     </a>
     <a href="javascript:void(0);" class="active icon" @click.prevent="search = !search">
@@ -54,7 +54,34 @@ export default {
      */
     toggleNav : () => {
       sideNav.$emit("toggleSideNav", !open);
-    }
+    },
+    /**
+     * Emits event to create new contact
+     */
+    toggleNew : () => {
+      sideNav.$emit("toggleNew", !New);
+      if (!open) {
+        toggleNav();
+      }
+    },
+    /**
+     * Emits event to toggle settings on sidnav
+     */
+    toggleSettings : () => {
+      sideNav.$emit("toggleSettings", !settings);
+      if (!open) {
+        toggleNav();
+      }
+    },
+    /**
+     * Emits event to toggle help on sidenav
+     */
+    toggleHelp : () => {
+      sideNav.$emit("toggleHelp", !help);
+      if (!open) {
+        toggleNav();
+      }
+    },
   },
   props : {
     open : {
