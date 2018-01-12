@@ -1,10 +1,14 @@
 <template>
-  <div id="mySidenav" v-bind:class="{sidenav: true, 'open-nav': !close, 'close-nav': close}">
-    <a href="javascript:void(0)" class="closebtn" @click.prevent="closeNav()">&times;</a>
-    <a href="#">About</a>
-    <a href="#">Services</a>
-    <a href="#">Clients</a>
-    <a href="#">Contact</a>
+  <div id="mySidenav" :class="{sidenav: true, 'open-nav': !open, 'close-nav': open}">
+    <a href="javascript:void(0)" class="closebtn" @click.prevent="closeNav()">
+      <i class="fa fa-angle-double-left" aria-hidden="true"></i>
+    </a>
+    <a href="#">
+      <i class="fa fa-address-book" aria-hidden="true"></i> Contacts <span class="badge badge-success">30</span>
+    </a>
+    <a href="#"><i aria-hidden="true" class="fa fa-plus-circle"></i> New</a>
+    <a href="#"><i data-v-46725f86="" aria-hidden="true" class="fa fa-cog"></i> Settings</a>
+    <a href="#"><i data-v-46725f86="" aria-hidden="true" class="fa fa-question-circle"></i> Help</a>
   </div>
 </template>
 
@@ -20,7 +24,7 @@ export default {
   },
   methods: {
     closeNav : () => {
-      sideNav.$emit("closeNav", true);
+      sideNav.$emit("toggleSideNav", !open);
     },
   },
   props: {
@@ -31,7 +35,6 @@ export default {
   },
   created() {
     sideNav.$on("openNav", (event) => {
-      this.close = !event;
     });
     sideNav.$on("closeNav", (event) => {
       this.close = event;
@@ -45,16 +48,23 @@ export default {
 /**
  * The side navigation menu
  */
+$green            : #4caf50;
+
+.badge {
+  border-radius: 50%;
+}
+
 .sidenav {
-  height           : 100%; /* 100% Full-height */
+  height           : 100%;
+  position         : fixed;
+  margin-top       : 52px;
+  z-index          : auto;
   width            : 0; /* 0 width - change this with JavaScript */
-  position         : fixed; /* Stay in place */
-  z-index          : 1; /* Stay on top */
+  z-index          : 0; /* Stay on top */
   top              : 0; /* Stay at the top */
   left             : 0;
-  background-color : #111; /* Black*/
+  background-color : #333;/* Black*/
   overflow-x       : hidden; /* Disable horizontal scroll */
-  padding-top      : 60px; /* Place content 60px from the top */
   transition       : 0.5s; /* 0.5 second transition effect to slide in the sidenav */
 }
 
@@ -62,38 +72,48 @@ export default {
 .sidenav a {
   padding         : 8px 8px 8px 32px;
   text-decoration : none;
-  font-size       : 25px;
-  color           : #818181;
+  font-size       : 20px;
+  color           : $green;
+  font-variant    : all-petite-caps;
   display         : block;
   transition      : 0.3s;
 }
 
 /* When you mouse over the navigation links, change their color */
 .sidenav a:hover {
-  color : #f1f1f1;
+  background-color : #ddd;
+  color            : $green !important;
 }
 
 /* Position and style the close button (top right corner) */
 .sidenav .closebtn {
-  position    : absolute;
-  top         : 0;
-  right       : 25px;
-  font-size   : 36px;
-  margin-left : 50px;
+  font-size    : 36px;
+  padding-left : 10px;
+  color        : $green;
+  font-weight  : bold;
+  font-size    : 20px;
+  cursor       : pointer;
+  margin-left  : 50px;
+  text-align   : right;
+}
+
+.sidenav .closebtn:hover {
+  background-color : #333;
+  color            : #fff !important;
 }
 
 /**
- *
+ * Hides the navebar
  */
 .close-nav {
-  width: 0px;
+  left: -300px;
 }
 
 /**
- *
+ * Show the navbar
  */
 .open-nav {
-  width: 250px;
+  width : 211px;
 }
 
 /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
@@ -106,17 +126,5 @@ export default {
 @media screen and (max-height: 450px) {
   .sidenav {padding-top : 15px;}
   .sidenav a {font-size : 18px;}
-}
-.closebtn {
-  padding-left : 10px;
-  color        : #888;
-  font-weight  : bold;
-  float        : right;
-  font-size    : 20px;
-  cursor       : pointer;
-}
-
-.closebtn:hover {
-  color : #000;
 }
 </style>
