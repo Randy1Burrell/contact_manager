@@ -68,7 +68,7 @@ export default {
         /**
          * Case statement selects what will be searched
          */
-        switch(searchType.toLowerCase()){
+        switch (searchType.toLowerCase()) {
           case 'email':
             var addresses = obj.filter(function (mailAddress) {
               return (mailAddress.match(regx)) ? mailAddress : null;
