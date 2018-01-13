@@ -5,7 +5,8 @@
     <app-sidebar v-bind="toggle"></app-sidebar>
 
     <app-contacts v-bind="toggle"
-                  v-bind:contacts="search(toggle.query)"></app-contacts>
+                  v-bind:contacts="search(toggle.query)">
+    </app-contacts>
   </div>
 </template>
 
