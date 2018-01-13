@@ -91,7 +91,7 @@ export default {
       // Name variable to hold firsname and last name of each contact
       var name = '';
       return this.contacts.filter(function (contact) {
-        // Concatenate firstnam and last name
+        // Concatenate firstnam and last name for matching
         name = contact.firstname + ' ' + contact.lastname;
         /**
          * Search names,
