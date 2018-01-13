@@ -1,9 +1,12 @@
 <template>
   <div id="app">
+  <!-- Navbar element -->
     <app-navbar v-bind="toggle"></app-navbar>
 
+  <!-- Displays sidebar -->
     <app-sidebar v-bind="toggle"></app-sidebar>
 
+  <!-- Displays contacts -->
     <app-contacts v-bind="toggle"
                   v-bind:contacts="search(toggle.query)">
     </app-contacts>
