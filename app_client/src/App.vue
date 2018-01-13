@@ -1,13 +1,11 @@
 <template>
   <div id="app">
-    <app-navbar v-on:open="open"></app-navbar>
+    <app-navbar v-bind="toggle"></app-navbar>
 
-    <app-sidebar v-bind:open="open"
-      v-bind:help="help"
-      v-bind:settings="settings">
-    </app-sidebar>
+    <app-sidebar v-bind="toggle"></app-sidebar>
 
-    <app-contacts></app-contacts>
+    <app-contacts v-bind="toggle"
+                  v-bind:contacts="search(toggle.query)"></app-contacts>
   </div>
 </template>
 
@@ -26,41 +24,88 @@ export default {
   name: 'app',
   data () {
     return {
-      msg:       "Contacts List",
       contacts:  [],
-      help: false,
-      open: false,
-      newCon: false,
-      settings: false
+      toggle: {
+        help: false,
+        openNav: false,
+        newCon: false,
+        settings: false,
+        search: false,
+        query: '',
+      }
     }
   },
   methods: {
+    search: function (query) {
+      var regx = new RegExp(query, 'gi');
+      return this.contacts.filter(function (contact) {
+        if (contact.firstname.match(regx) || contact.lastname.match(regx)) {
+          return contact;
+        }/* else if (this.searchEmail(contact.email, regx)) {
+          return contact;
+        }*/
+      });
+    },
+    searchEmail: function (email, regx) {
+      return email.filter(function (mailAddress) {
+        if (mailAddress.match(regx)) {
+          return mailAddress;
+        }
+      });
+    },
   },
-  created() {
+  created: function () {
+    // Changes query
+    sideNav.$on("queryChanged", (event) => {
+      this.toggle.query = event;
+    });
+
+    // Toggle sidebar when event is received
+    sideNav.$on("toggleSideNav", (event) => {
+      this.toggle.openNav = !this.toggle.openNav;
+    });
+
+    // Toggle settings when event is received
+    sideNav.$on("toggleSettings", (event) => {
+      this.toggle.settings = !this.toggle.settings;
+      if (!this.toggle.openNav) {
+        this.toggle.openNav = !this.toggle.openNav;
+      }
+    });
+
+    // Toggle help when event is received
+    sideNav.$on("toggleHelp", (event) => {
+      this.toggle.help = !this.toggle.help;
+      if (!this.toggle.openNav) {
+        this.toggle.openNav = !this.toggle.openNav;
+      }
+    });
+
+    // Toggle new when event is received
+    sideNav.$on("toggleNew", (event) => {
+      this.toggle.newCon = !this.toggle.newCon;
+    });
+
+    // Toggle removes sidenav if it is showing
+    sideNav.$on("toggleSearch", (event) => {
+      this.toggle.search = !this.toggle.search;
+      if (this.toggle.openNav) {
+        this.toggle.openNav = this.toggle.openNav;
+      }
+    });
+
+    // Get contacts from server
     this.$http.get('http://localhost:3000/api/contact/').then((data) => {
       this.contacts = data.body;
     });
-    // Toggle sidebar when event is received
-    sideNav.$on("toggleSideNav", (event) => {
-      this.open = !this.open;
-    });
-    // Toggle settings when event is received
-    sideNav.$on("toggleSettings", (event) => {
-      this.settings = !this.settings;
-    });
-    // Toggle help when event is received
-    sideNav.$on("toggleHelp", (event) => {
-      this.help = !this.help;
-    });
-    // Toggle new when event is received
-    sideNav.$on("toggleNew", (event) => {
-      this.newCon = !this.newCon;
-    });
-  }
+  },
 }
 </script>
 
 <style lang="scss">
+/**
+ * Make document and body 100%
+ */
 .body, html {
   height: 100%;
 }
@@ -74,7 +119,10 @@ export default {
   -webkit-appearance : none !important;
   box-shadow         : 0px 0px !important;
 }
-
+/**
+ * Calculate padding, border and outline
+ * in box-size
+ */
 * {
   box-sizing: border-box !important;
 }
