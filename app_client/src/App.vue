@@ -58,7 +58,7 @@ export default {
        * obj should be an array and
        * searchType = 'email' | 'phone' | 'address'
        */
-      var searchBy = function (obj, searchType, regx) {
+      var searchBy = (obj, searchType, regx) => {
         /**
          * return flase if an array was not passed in
          * as obj param
