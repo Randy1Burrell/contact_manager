@@ -49,6 +49,43 @@ export default {
   },
   methods: {
     search: function (query) {
+      /**
+       * This function will be used to filter
+       * address, email and phone number.
+       * obj should be an array and
+       * searchType = 'email' | 'phone' | 'address'
+       */
+      var searchBy = function (obj, searchType, regx) {
+        /**
+         * return flase if an array was not passed in
+         * as obj param
+         */
+        if (!Array.isArray(obj))
+          return false;
+        /**
+         * Case statement selects what will be searched
+         */
+        switch(searchType.toLowerCase()){
+          case 'email':
+            var addresses = obj.filter(function (mailAddress) {
+              return (mailAddress.match(regx)) ? mailAddress : null;
+            });
+            return (addresses.length > 0);
+            break;
+          case 'phone':
+            var number = obj.filter(function (phone) {
+              return (phone.match(regx)) ? phone : null;
+            });
+            return (number.length > 0);
+            break;
+          case 'address':
+            var addresses = obj.filter(function (address) {
+              return (address.match(regx)) ? address : null;
+            });
+            return (addresses.length > 0);
+            break;
+        }
+      };
       // Define query regular expression
       var regx = new RegExp(query, 'gi');
       // Name variable to hold firsname and last name of each contact
@@ -56,17 +93,20 @@ export default {
       return this.contacts.filter(function (contact) {
         // Concatenate firstnam and last name
         name = contact.firstname + ' ' + contact.lastname;
+        /**
+         * Search names,
+         * then email,
+         * then phone numbers,
+         * then addresses
+         */
         if (name.match(regx)) {
           return contact;
-        }/* else if (this.searchEmail(contact.email, regx)) {
+        } else if (searchBy(contact.email, 'email', regx)) {
           return contact;
-        }*/
-      });
-    },
-    searchEmail: function (email, regx) {
-      return email.filter(function (mailAddress) {
-        if (mailAddress.match(regx)) {
-          return mailAddress;
+        } else if (searchBy(contact.phoneNumber, 'phone', regx)) {
+          return contact;
+        } else if (searchBy(contact.address, 'address', regx)) {
+          return contact;
         }
       });
     },
