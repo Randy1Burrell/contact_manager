@@ -12,7 +12,14 @@
 
 <script>
 
+/**
+ * Event bus
+ */
 import {sideNav} from './bus/navigation'
+
+/**
+ * Components
+ */
 import Contacts from './components/Contacts.vue'
 import Sidebar from './components/Sidebar.vue'
 import Navbar from './components/Navbar.vue'
