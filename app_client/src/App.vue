@@ -16,6 +16,10 @@ import {sideNav} from './bus/navigation'
 import Contacts from './components/Contacts.vue'
 import Sidebar from './components/Sidebar.vue'
 import Navbar from './components/Navbar.vue'
+
+/**
+ * Controller component for app clientcomponents
+ */
 export default {
   components: {
     'app-contacts' : Contacts,
