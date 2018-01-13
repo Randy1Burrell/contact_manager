@@ -49,9 +49,14 @@ export default {
   },
   methods: {
     search: function (query) {
+      // Define query regular expression
       var regx = new RegExp(query, 'gi');
+      // Name variable to hold firsname and last name of each contact
+      var name = '';
       return this.contacts.filter(function (contact) {
-        if (contact.firstname.match(regx) || contact.lastname.match(regx)) {
+        // Concatenate firstnam and last name
+        name = contact.firstname + ' ' + contact.lastname;
+        if (name.match(regx)) {
           return contact;
         }/* else if (this.searchEmail(contact.email, regx)) {
           return contact;
