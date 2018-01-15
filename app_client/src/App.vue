@@ -1,15 +1,19 @@
 <template>
   <div id="app">
-  <!-- Navbar element -->
+    <!-- Navbar element -->
     <app-navbar v-bind="toggle"></app-navbar>
 
-  <!-- Displays sidebar -->
+    <!-- Displays sidebar -->
     <app-sidebar v-bind="toggle"></app-sidebar>
 
-  <!-- Displays contacts -->
+    <!-- Displays contacts -->
     <app-contacts v-bind="toggle"
-                  v-bind:contacts="search(toggle.query)">
+                  v-for="contact in search(toggle.query)"
+                  v-bind:contact="contact">
     </app-contacts>
+    <!-- -->
+    <do-contact v-bind="toggle" v-bind:contact="contact">
+    </do-contact>
   </div>
 </template>
 
@@ -26,6 +30,7 @@ import {sideNav} from './bus/navigation'
 import Contacts from './components/Contacts.vue'
 import Sidebar from './components/Sidebar.vue'
 import Navbar from './components/Navbar.vue'
+import DoContact from './components/DoContact.vue'
 
 /**
  * Controller component for app clientcomponents
@@ -33,6 +38,7 @@ import Navbar from './components/Navbar.vue'
 export default {
   components: {
     'app-contacts' : Contacts,
+    'do-contact'   : DoContact,
     'app-sidebar'  : Sidebar,
     'app-navbar'   : Navbar
   },
@@ -47,7 +53,9 @@ export default {
         settings: false,
         search: false,
         query: '',
-      }
+        view: true,
+      },
+      contact: {}
     }
   },
   methods: {
@@ -144,6 +152,14 @@ export default {
     // Toggle new when event is received
     sideNav.$on("toggleNew", (event) => {
       this.toggle.newCon = !this.toggle.newCon;
+      this.contact = {
+        firstname: '',
+        lastname: '',
+        dob: '',
+        phoneNumber: [''],
+        email: [''],
+        address: ['']
+      }
     });
 
     // Toggle removes sidenav if it is showing
@@ -152,6 +168,11 @@ export default {
       if (this.toggle.openNav) {
         this.toggle.openNav = this.toggle.openNav;
       }
+    });
+
+    // view contact
+    sideNav.$on("viewContact", (event) => {
+      this.contact = event;
     });
 
     // Get contacts from server
