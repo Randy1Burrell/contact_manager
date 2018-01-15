@@ -148,7 +148,7 @@ var emailValidation = function(email) {
  */
 var contactCreator = function(req, res) {
   // Check if address has been given
-  var address = (req.body.address) ? req.body.address.split(',') : '';
+  var address = (req.body.address) ? req.body.address : [''];
   // Check if dob has been given
   var dob = (req.body.dob) ? new Date(req.body.dob) : '';
   // Create contact when all checks have been passed
@@ -156,10 +156,10 @@ var contactCreator = function(req, res) {
     .create({
         firstname: req.body.firstname,
         lastname: req.body.lastname,
-        phoneNumber: req.body.phoneNumber.split(' '),
+        phoneNumber: req.body.phoneNumber,
         address: address,
         dob: dob,
-        email: req.body.email.split(' ')
+        email: req.body.email
       }, // Supply required callback to mongoose.create
       function(err, result) {
         /**
@@ -194,8 +194,8 @@ var contactCreateUpdate = function(req, res, option) {
      * Make check for all required arguments
      */
     var requestValidation = parseReqBody(req);
-    var phoneNumber = req.body.phoneNumber.split(' ');
-    var email = req.body.email.split(' ');
+    var phoneNumber = req.body.phoneNumber;
+    var email = req.body.email;
     if (requestValidation.bad) {
       // Send appropriate response
       badRequest.message = 'Missing are ' + requestValidation.message;
@@ -235,7 +235,7 @@ var updateContact = function(req, res) {
     sendJsonResponse(res, 404, notFound);
   } else {
     // Check if address has been given
-    var address = (req.body.address) ? req.body.address.split(',') : '';
+    var address = (req.body.address) ? req.body.address : [''];
     // Check if dob has been given
     var dob = (req.body.dob) ? new Date(req.body.dob) : '';
     // Updae contact
@@ -250,10 +250,10 @@ var updateContact = function(req, res) {
         } else {
           contact.firstname = req.body.firstname;
           contact.lastname = req.body.lastname;
-          contact.phoneNumber = req.body.phoneNumber.split(' ');
+          contact.phoneNumber = req.body.phoneNumber;
           contact.address = address;
           contact.dob = dob;
-          contact.email = req.body.email.split(' ');
+          contact.email = req.body.email;
 
           contact.save(function(err, contact) {
             if (err) {
