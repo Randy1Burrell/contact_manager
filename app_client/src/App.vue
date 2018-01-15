@@ -45,17 +45,18 @@ export default {
   name: 'app',
   data () {
     return {
-      contacts:  [],
-      toggle: {
-        help: false,
-        openNav: false,
-        newCon: false,
-        settings: false,
-        search: false,
-        query: '',
-        view: true,
+      contacts   : [],
+      toggle     : {
+        help     : false,
+        openNav  : false,
+        newCon   : false,
+        settings : false,
+        search   : false,
+        view     : false,
+        edit     : false,
+        query    : ''
       },
-      contact: {}
+      contact    : {}
     }
   },
   methods: {
@@ -152,6 +153,7 @@ export default {
     // Toggle new when event is received
     sideNav.$on("toggleNew", (event) => {
       this.toggle.newCon = !this.toggle.newCon;
+      this.toggle.view = false;
       this.contact = {
         firstname: '',
         lastname: '',
@@ -171,8 +173,27 @@ export default {
     });
 
     // view contact
-    sideNav.$on("viewContact", (event) => {
-      this.contact = event;
+    sideNav.$on("viewContact", (contact) => {
+      this.toggle.newCon = false;
+      this.toggle.view = true;
+      this.contact = contact;
+    });
+
+    // edit contact
+    sideNav.$on("toggleEdit", (event) => {
+      this.toggle.edit = true;
+    });
+
+    // Save contact
+    sideNav.$on("save", (event) => {
+      this.toggle.edit = false;
+    });
+
+    // Save contact
+    sideNav.$on("close", (event) => {
+      this.toggle.view = false;
+      this.toggle.newCon = false;
+      this.toggle.edit = false;
     });
 
     // Get contacts from server
