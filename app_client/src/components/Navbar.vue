@@ -9,11 +9,12 @@
             <i class="fa fa-search" aria-hidden="true"></i>
           </button>
         </span>
-        <input type="text" class="form-control" placeholder="Search Contacts">
+        <input type="text" v-on:keyup.capture="searchQuery" class="form-control" placeholder="Search Contacts">
       </div>
     </a>
     <a href="javascript:void(0);" @click.prevent="toggleNew()">
-      <i class="fa fa-plus-circle" aria-hidden="true"></i>
+      <i class="fa fa-plus-circle" v-if="!newCon" aria-hidden="true"></i>
+      <i class="fa fa-minus-circle" v-else aria-hidden="true"></i>
     </a>
     <a href="javascript:void(0);" @click.prevent="toggleSettings()" class="helpers">
       <i class="fa fa-cog" aria-hidden="true"></i>
@@ -21,7 +22,7 @@
     <a href="javascript:void(0);" @click.prevent="toggleHelp()" class="helpers">
       <i class="fa fa-question-circle" aria-hidden="true"></i>
     </a>
-    <a href="javascript:void(0);" class="active icon" @click.prevent="search = !search">
+    <a href="javascript:void(0);" class="active icon" @click.prevent="toggleSearch()">
       <i class="fa fa-search" aria-hidden="true"></i>
     </a>
   </div>
@@ -31,64 +32,62 @@
 import {sideNav} from '../bus/navigation'
 
 export default {
-  name: 'navigation',
-  data() {
+  name: 'Navbar',
+  data () {
     return {
-      search: false
     };
   },
+  props: {
+    search: {
+      type: Boolean
+    },
+    newCon: {
+      type: Boolean
+    }
+  },
   methods: {
+    searchQuery : function (event) {
+      sideNav.$emit("queryChanged", event.target.value);
+    },
     /**
      * Toggle between adding and
      * removing the "responsive"
      * class to topnav when the user
      * clicks on the icon
      */
-    toggleSearch : () => {
-      this.search = !this.search;
+    toggleSearch : function () {
+      sideNav.$emit("toggleSearch", true);
     },
     /**
      * Emits event to sideNav bus to
      * toggle side navigation bar on
      * and off the screen
      */
-    toggleNav : () => {
-      sideNav.$emit("toggleSideNav", !open);
+    toggleNav : function () {
+      sideNav.$emit("toggleSideNav", true);
     },
     /**
      * Emits event to create new contact
      */
-    toggleNew : () => {
-      sideNav.$emit("toggleNew", !New);
-      if (!open) {
-        toggleNav();
-      }
+    toggleNew : function () {
+      sideNav.$emit("toggleNew", true);
     },
     /**
      * Emits event to toggle settings on sidnav
      */
-    toggleSettings : () => {
-      sideNav.$emit("toggleSettings", !settings);
-      if (!open) {
-        toggleNav();
-      }
+    toggleSettings : function () {
+      sideNav.$emit("toggleSettings", true);
     },
     /**
      * Emits event to toggle help on sidenav
      */
-    toggleHelp : () => {
-      sideNav.$emit("toggleHelp", !help);
-      if (!open) {
-        toggleNav();
-      }
+    toggleHelp : function () {
+      sideNav.$emit("toggleHelp", true);
     },
   },
-  props : {
-    open : {
-      type: Boolean
-    }
-  },
-  created () {
+  created: function () {
+    sideNav.$on("toggleSideNav", (event) => {
+    });
   }
 }
 </script>
@@ -130,6 +129,9 @@ a .input-group input {
   position         : fixed !important;
   width            : 100%;
   z-index          : 1;
+  transition                 : 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+  -webkit-transition         : 0.5s;
+  transition-timing-function : linear;
 }
 
 /**
@@ -150,6 +152,9 @@ a .input-group input {
   padding         : 14px 16px;
   text-align      : center;
   text-decoration : none;
+  transition                 : 0.5s !important;
+  -webkit-transition         : 0.5s !important;
+  transition-timing-function : linear !important;
 }
 
 /**
