@@ -1,23 +1,24 @@
 <template>
-  <div id="mySidenav" :class="{sidenav: true, 'open-nav': !openNav, 'close-nav': openNav}">
+  <div id="mySidenav" :class="{sidenav: true, 'open-nav': openNav, 'close-nav': !openNav}">
     <a href="javascript:void(0)" class="closebtn" @click.prevent="closeNav()">
       <i class="fa fa-angle-double-left" aria-hidden="true"></i>
     </a>
     <a href="#">
       <i class="fa fa-address-book" aria-hidden="true"></i> Contacts <span class="badge badge-success">30</span>
     </a>
-    <a href="#">
-      <i aria-hidden="true" class="fa fa-plus-circle"></i>
+    <a href="javascript:void(0)" @click="toggleNew()">
+      <i aria-hidden="true" v-if="!newCon" class="fa fa-plus-circle"></i>
+      <i aria-hidden="true" v-else class="fa fa-minus-circle"></i>
       New
     </a>
-    <a href="#">
+    <a href="javascript:void(0)" @click="toggleSettings()">
       <i data-v-46725f86="" aria-hidden="true" class="fa fa-cog"></i>
       Settings
     </a>
-    <div v-if="settings" :class="{show: settings}">
+    <div v-if="settings" class="show">
       <h1>Settings</h1>
     </div>
-    <a href="#">
+    <a href="javascript:void(0)" @click="toggleHelp">
       <i data-v-46725f86="" aria-hidden="true" class="fa fa-question-circle"></i>
       Help
     </a>
@@ -40,13 +41,28 @@ export default {
     closeNav : () => {
       sideNav.$emit("toggleSideNav", true);
     },
+    toggleHelp : () => {
+      sideNav.$emit("toggleHelp", true);
+    },
+    toggleSettings : () => {
+      sideNav.$emit("toggleSettings", true);
+    },
+    /**
+     * Emits event to create new contact
+     */
+    toggleNew : function () {
+      sideNav.$emit("toggleNew", true);
+    },
   },
   props: {
+    help: {
+      type: Boolean
+    },
     openNav: {
       type     : Boolean,
       required : true
     },
-    help: {
+    newCon: {
       type: Boolean
     },
     settings: {
@@ -88,9 +104,8 @@ $green            : #4caf50;
   background-color           : #333;/* Black*/
   overflow-x                 : hidden; /* Disable horizontal scroll */
   transition                 : 0.5s; /* 0.5 second transition effect to slide in the sidenav */
-  transition-timing-function : ease-in-out;
-  transition-delay           : 1s;
   -webkit-transition         : 0.5s;
+  transition-timing-function : linear;
 }
 
 /* The navigation menu links */
@@ -101,7 +116,6 @@ $green            : #4caf50;
   color           : $green;
   font-variant    : all-petite-caps;
   display         : block;
-  transition      : 0.3s;
 }
 
 /* When you mouse over the navigation links, change their color */
@@ -128,26 +142,20 @@ $green            : #4caf50;
 }
 
 /**
- * Hides the navebar
- */
-.close-nav {
-  left: -300px;
-}
-
-/**
  * Show the navbar
  */
 .open-nav {
   width : 211px;
 }
 
-/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
-#main {
-  transition : margin-left .5s;
-  padding    : 20px;
-}
-
-/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+/**
+ * On smaller screens, where
+ * height is less than
+ * 450px, change the style
+ * of the sidenav (less
+ * padding and a smaller
+ * font size)
+ */
 @media screen and (max-height: 450px) {
   .sidenav {padding-top : 15px;}
   .sidenav a {font-size : 18px;}
