@@ -5,10 +5,7 @@
     <!-- Display this div when viewing a contact -->
     <div class="submit" v-if="view">
       <ul>
-        <li class="action" @click.prevent="close()">Close <i class="fa fa-angle-double-right"></i></li>
-        <li class="action" @click.prevent="toggleEdit()" v-if="!edit">Edit <i class="fa fa-pencil" aria-hidden="true"></i></li>
-        <li class="action" @click.prevent="save()" v-else>Save <i class="fa fa-floppy-o" aria-hidden="true"></i></li>
-        <li class="action" @click.prevent="deleteContact()">Delete <i class="fa fa-trash" aria-hidden="true"></i></li>
+        <li class="action delete" @click.prevent="deleteContact()">Delete <i class="fa fa-trash" aria-hidden="true"></i></li>
       </ul>
     </div>
 
@@ -20,17 +17,19 @@
         <label class="sr-only" for="firstname">Firstname</label>
         <div class="col-6">
           <input class="form-control"
-                 type="text"
+                 :disabled="!edit"
                  id="firstname"
                  placeholder="firstname"
+                 type="text"
                  v-model="contact.firstname">
         </div>
         <label class="sr-only" for="lastname">Lastname</label>
         <div class="col-6">
           <input class="form-control"
-                 type="text"
+                 :disabled="!edit"
                  id="lastname"
                  placeholder="lastname"
+                 type="text"
                  v-model="contact.lastname">
         </div>
       </div>
@@ -47,10 +46,12 @@
         <label for="email" class="sr-only">Email</label>
         <div class="col-12">
           <input :class="{'form-control': true, 'small-input': several(contact.email)}"
-             type="email"
+             :disabled="!edit"
              id="email"
              placeholder="Ex: diddy@diddy.com"
-             v-model="contact.email[index]">
+             type="email"
+             v-model="contact.email[index]"
+             required>
 
           <!-- Remove email address of contact-->
           <a href="javascript:void(0)"
@@ -77,10 +78,12 @@
         <label for="telephone" class="sr-only">Telephone</label>
         <div class="col-12">
           <input :class="{'form-control': true, 'small-input': several(contact.phoneNumber)}"
+             :disabled="!edit"
              type="tel"
              id="telephone"
              placeholder="Ex: 1-(192)-304-3049"
-             v-model="contact.phoneNumber[index]">
+             v-model="contact.phoneNumber[index]"
+             required>
 
           <!-- Remove phone number of contact-->
           <a href="javascript:void(0)"
@@ -107,10 +110,12 @@
         <label for="address" class="sr-only">Address</label>
         <div class="col-12">
           <input :class="{'form-control': true, 'small-input': several(contact.address)}"
-             type="text"
+             :disabled="!edit"
              id="address"
              placeholder="Address: 22 North St."
-             v-model="contact.address[index]">
+             type="text"
+             v-model="contact.address[index]"
+             required>
 
           <!-- Remove address of contact -->
           <a href="javascript:void(0)"
@@ -137,11 +142,25 @@
       </div>
     </form>
 
-    <!-- Buttons used to create new contact -->
-    <div class="submit" v-if="newCon">
+    <div class="submit" v-if="view">
+      <a href="javascript:void(0)"
+         class="action"
+         @click.prevent="toggleEdit()"
+         v-if="!edit && view">
+        Edit <i class="fa fa-pencil" aria-hidden="true"></i>
+      </a>
+      <a href="javascript:void(0)"
+         class="action"
+         @click.prevent="save()"
+         v-else>
+        Save <i class="fa fa-floppy-o" aria-hidden="true"></i>
+      </a>
+
+      <!-- Buttons used to create new contact -->
 
       <!-- Save contact button -->
-      <a id="save"
+      <a v-if="newCon"
+         id="save"
          class="action"
          href="javascript:void(0)"
          @click.prevent="createContact()">
@@ -180,7 +199,7 @@ export default {
   },
   methods: {
     several: function (array) {
-      return (array.length > 1);
+      return (array.length > 1) && this.edit;
     },
     addAddress: function () {
       this.contact.address.push("");
@@ -300,7 +319,7 @@ form {
   top              : 0px;
   right            : 0px;
   min-width        : 0px;
-  max-width        : 0px;
+  max-width        : 0%;
   transition       : all 0.5s linear;
   background-color : #fff;
   height           : 100%;
@@ -322,6 +341,10 @@ form {
 
 .center-i {
   padding-top : 10px !important;
+}
+
+.delete {
+  float: right;
 }
 
 .show , .edit {
