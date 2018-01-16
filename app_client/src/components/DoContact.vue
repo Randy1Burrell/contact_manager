@@ -128,11 +128,11 @@
         <!-- Screen reader label for DOB -->
         <label for="dob" class="sr-only">Date of Birth</label>
         <div class="col-12">
-          <input class="form-control"
-                 type="date"
-                 id="dob"
-                 placeholder="Date of Birth mm/dd/yyyy"
-                 v-model="contact.dob">
+          <datepicker input-class="form-control"
+                      id="dob"
+                      placeholder="DD/MM/YYYY"
+                      v-model="contact.dob">
+          </datepicker>
         </div>
       </div>
     </form>
@@ -163,10 +163,14 @@
 
 
 <script>
+import Datepicker from 'vuejs-datepicker'
 import {sideNav} from '../bus/navigation'
 
 export default {
   nmae: 'DoContact',
+  components: {
+    Datepicker
+  },
   data () {
     return {
       email: this.severalEmail
