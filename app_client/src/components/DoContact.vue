@@ -142,26 +142,25 @@
       </div>
     </form>
 
-    <div class="submit" v-if="view">
+    <div class="submit" v-if="view || newCon">
       <a href="javascript:void(0)"
          class="action"
          @click.prevent="toggleEdit()"
          v-if="!edit && view">
         Edit <i class="fa fa-pencil" aria-hidden="true"></i>
       </a>
+
+      <!-- Save edits Button -->
       <a href="javascript:void(0)"
-         class="action"
+         class="action save"
          @click.prevent="save()"
-         v-else>
+         v-else-if="edit && view">
         Save <i class="fa fa-floppy-o" aria-hidden="true"></i>
       </a>
 
-      <!-- Buttons used to create new contact -->
-
-      <!-- Save contact button -->
+      <!-- Save new contact button -->
       <a v-if="newCon"
-         id="save"
-         class="action"
+         class="action save"
          href="javascript:void(0)"
          @click.prevent="createContact()">
         Save
@@ -288,8 +287,8 @@ form {
   }
 }
 
-#save {
-  background-color : #09cfc0;
+.save {
+  background-color : #09cfc0 !important;
 }
 
 #cancel {
