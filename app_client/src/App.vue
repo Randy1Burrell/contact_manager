@@ -7,10 +7,13 @@
     <app-sidebar v-bind="toggle"></app-sidebar>
 
     <!-- Displays contacts -->
-    <app-contacts v-bind="toggle"
-                  v-for="contact in search(toggle.query)"
-                  v-bind:contact="contact">
-    </app-contacts>
+    <div :class="{'container-fluid': true, shiftSearch: search}">
+      <app-contacts v-bind="toggle"
+                    v-for="contact in search"
+                    :key="contact._id"
+                    v-bind:contact="contact">
+      </app-contacts>
+    </div>
     <!-- -->
     <do-contact v-bind="toggle" v-bind:contact="contact">
     </do-contact>
@@ -59,68 +62,70 @@ export default {
       contact    : {}
     }
   },
-  methods: {
-    search: function (query) {
-      /**
-       * This function will be used to filter
-       * address, email and phone number.
-       * obj should be an array and
-       * searchType = 'email' | 'phone' | 'address'
-       */
-      var searchBy = (obj, searchType, regx) => {
+  computed: {
+    search: {
+      get: function () {
         /**
-         * return flase if an array was not passed in
-         * as obj param
+         * This function will be used to filter
+         * address, email and phone number.
+         * obj should be an array and
+         * searchType = 'email' | 'phone' | 'address'
          */
-        if (!Array.isArray(obj))
-          return false;
-        /**
-         * Case statement selects what will be searched
-         */
-        switch (searchType.toLowerCase()) {
-          case 'email':
-            var addresses = obj.filter(function (mailAddress) {
-              return (mailAddress.match(regx)) ? mailAddress : null;
-            });
-            return (addresses.length > 0);
-            break;
-          case 'phone':
-            var number = obj.filter(function (phone) {
-              return (phone.match(regx)) ? phone : null;
-            });
-            return (number.length > 0);
-            break;
-          case 'address':
-            var addresses = obj.filter(function (address) {
-              return (address.match(regx)) ? address : null;
-            });
-            return (addresses.length > 0);
-            break;
-        }
-      };
-      // Define query regular expression
-      var regx = new RegExp(query, 'gi');
-      // Name variable to hold firsname and last name of each contact
-      var name = '';
-      return this.contacts.filter(function (contact) {
-        // Concatenate firstnam and last name for matching
-        name = contact.firstname + ' ' + contact.lastname;
-        /**
-         * Search names,
-         * then email,
-         * then phone numbers,
-         * then addresses
-         */
-        if (name.match(regx)) {
-          return contact;
-        } else if (searchBy(contact.email, 'email', regx)) {
-          return contact;
-        } else if (searchBy(contact.phoneNumber, 'phone', regx)) {
-          return contact;
-        } else if (searchBy(contact.address, 'address', regx)) {
-          return contact;
-        }
-      });
+        var searchBy = (obj, searchType, regx) => {
+          /**
+           * return flase if an array was not passed in
+           * as obj param
+           */
+          if (!Array.isArray(obj))
+            return false;
+          /**
+           * Case statement selects what will be searched
+           */
+          switch (searchType.toLowerCase()) {
+            case 'email':
+              var addresses = obj.filter(function (mailAddress) {
+                return (mailAddress.match(regx)) ? mailAddress : null;
+              });
+              return (addresses.length > 0);
+              break;
+            case 'phone':
+              var number = obj.filter(function (phone) {
+                return (phone.match(regx)) ? phone : null;
+              });
+              return (number.length > 0);
+              break;
+            case 'address':
+              var addresses = obj.filter(function (address) {
+                return (address.match(regx)) ? address : null;
+              });
+              return (addresses.length > 0);
+              break;
+          }
+        };
+        // Define query regular expression
+        var regx = new RegExp(this.toggle.query, 'gi');
+        // Name variable to hold firsname and last name of each contact
+        var name = '';
+        return this.contacts.filter(function (contact) {
+          // Concatenate firstnam and last name for matching
+          name = contact.firstname + ' ' + contact.lastname;
+          /**
+           * Search names,
+           * then email,
+           * then phone numbers,
+           * then addresses
+           */
+          if (name.match(regx)) {
+            return true;
+          } else if (searchBy(contact.email, 'email', regx)) {
+            return true;
+          } else if (searchBy(contact.phoneNumber, 'phone', regx)) {
+            return true;
+          } else if (searchBy(contact.address, 'address', regx)) {
+            return true;
+          }
+        });
+      }
     },
   },
   created: function () {
@@ -227,5 +232,10 @@ export default {
  */
 * {
   box-sizing: border-box !important;
+}
+@media screen and (max-width: 991px) {
+  .shiftSearch {
+    padding-top: 100px !important;
+  }
 }
 </style>
