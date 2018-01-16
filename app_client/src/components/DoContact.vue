@@ -317,7 +317,7 @@ form {
   padding-top: 10px !important;
 }
 
-.show , .edit{
+.show , .edit {
   min-width : 320px;
   max-width : 100%;
   padding   : 100px 30px;
