@@ -14,7 +14,7 @@
                     v-bind:contact="contact">
       </app-contacts>
     </div>
-    <!-- -->
+    <!-- Displays a single contact and all its details -->
     <do-contact v-bind="toggle" v-bind:contact="contact">
     </do-contact>
   </div>
