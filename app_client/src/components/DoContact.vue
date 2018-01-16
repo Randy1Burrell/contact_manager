@@ -248,6 +248,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+/**
+ * Theme colors
+ */
 $green : #4caf50;
 
 form {
@@ -302,8 +305,8 @@ form {
   overflow-y       : scroll;
 
   .small-input {
-    width: 93%;
-    display: inline;
+    width   : 93%;
+    display : inline;
   }
 
 
@@ -314,7 +317,7 @@ form {
 }
 
 .center-i {
-  padding-top: 10px !important;
+  padding-top : 10px !important;
 }
 
 .show , .edit {
@@ -324,29 +327,29 @@ form {
 }
 
 .submit {
-  text-align: center;
-  width: 100%;
-  height: 80px;
+  text-align      : center;
+  width           : 100%;
+  height          : 80px;
 
   ul {
-    margin-bottom: 0px;
-    padding: 0px;
+    margin-bottom : 0px;
+    padding       : 0px;
 
     li {
-      display: inline-block;
+      display     : inline-block;
     }
   }
 }
 
 @media screen and (max-width: 991px) {
   .right {
-    padding: 100px 0px;
-    left: 8px;
+    padding : 100px 0px;
+    left    : 8px;
   }
 
   .action {
-    padding: 5px 10px;
-    font-size: 14px;
+    padding   : 5px 10px;
+    font-size : 14px;
   }
 
 }
