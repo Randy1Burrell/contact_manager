@@ -7,9 +7,9 @@
     <app-sidebar v-bind="toggle"></app-sidebar>
 
     <!-- Displays contacts -->
-    <div :class="{'container-fluid': true, shiftSearch: search}">
+    <div :class="{'container-fluid': true, shiftSearch: toggle.search}">
       <app-contacts v-bind="toggle"
-                    v-for="contact in search"
+                    v-for="contact in searchContact"
                     :key="contact._id"
                     v-bind:contact="contact">
       </app-contacts>
@@ -63,7 +63,7 @@ export default {
     }
   },
   computed: {
-    search: {
+    searchContact: {
       get: function () {
         /**
          * This function will be used to filter
@@ -233,9 +233,16 @@ export default {
 * {
   box-sizing: border-box !important;
 }
+
+.container-fluid {
+  padding-top: 70px;
+  transition         : all 0.5s linear !important;
+  -webkit-transition : all 0.5s linear !important;
+}
+
 @media screen and (max-width: 991px) {
   .shiftSearch {
-    padding-top: 100px !important;
+    padding-top: 110px !important;
   }
 }
 </style>
