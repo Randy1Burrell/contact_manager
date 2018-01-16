@@ -1,5 +1,5 @@
 <template>
-  <div @click="viewContact" :class="{'container-fluid': true, shift: openNav, shiftSearch: search}">
+  <div @click="viewContact" :class="{'cont-container': true, shift: openNav}">
     <div class="chip">
       <img src="https://www.randyburrell.info/wp-content/uploads/2017/05/Randy_Burrell_Graduation_Picture.jpg" alt="Person" width="96" height="96">
       <ul>
@@ -45,7 +45,7 @@ export default {
 div {
   .chip {
     display          : block;
-    margin           : 5px 15px;
+    margin           : 0px 15px;
     padding          : 0px 25px;
     height           : 50px;
     font-size        : 14px;
@@ -80,14 +80,11 @@ div {
   }
 }
 
-.container-fluid {
+.cont-container {
   margin-left : 0px;
   font-size   : 14px;
   transition         : all 0.5s linear !important;
   -webkit-transition : all 0.5s linear !important;
-}
-.container-fluid:first-child {
-  padding-top : 70px !important;
 }
 
 .shift {
@@ -97,9 +94,6 @@ div {
 @media screen and (max-width: 991px) {
   .shift {
     margin-left : 0px !important;
-  }
-  .shiftSearch {
-    padding-top: 100px !important;
   }
 }
 </style>
