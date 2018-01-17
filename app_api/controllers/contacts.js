@@ -136,7 +136,6 @@ var emailValidation = function(email) {
   var bad = false;
   email.forEach(function(email_address) {
     if (!(/[\w.+-]+@[\w.+-]+\.[a-zA-Z0-9]{2,4}(,\s*)*/ig.test(email_address))) {
-      console.log(email_address);
       bad = true;
     }
   });
