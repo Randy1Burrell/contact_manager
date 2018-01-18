@@ -85,10 +85,6 @@ export default {
       sideNav.$emit("toggleHelp", true);
     },
   },
-  created: function () {
-    sideNav.$on("toggleSideNav", (event) => {
-    });
-  }
 }
 </script>
 
