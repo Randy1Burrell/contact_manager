@@ -116,7 +116,7 @@
         <i class="fa fa-plus-circle"
            aria-hidden="true"
            @click.prevent="addAddress()"
-           v-if="edit"></i>
+           v-show="edit"></i>
       </a>
 
       <!-- Loop through addresses of contact and display them -->
