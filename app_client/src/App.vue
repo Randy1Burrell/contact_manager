@@ -161,12 +161,12 @@ export default {
       this.toggle.view   = false;
       this.toggle.edit   = true;
       this.contact       = {
-        firstname: '',
-        lastname: '',
-        dob: '',
-        phoneNumber: [''],
-        email: [''],
-        address: ['']
+        firstname   : '',
+        lastname    : '',
+        dob         : '',
+        phoneNumber : [''],
+        email       : [''],
+        address     : ['']
       }
     });
 
