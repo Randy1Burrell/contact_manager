@@ -262,6 +262,11 @@ export default {
     addEmail: function () {
       this.contact.email.push("");
     },
+    /**
+     * This method adds a contact phone number
+     * to the phone number array and renders
+     * a new phone number field on the form
+     */
     addPhoneNumber: function () {
       this.contact.phoneNumber.push("");
     },
