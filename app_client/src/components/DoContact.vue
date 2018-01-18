@@ -268,6 +268,44 @@ export default {
         });
       this.submit = true;
     },
+    deleteContact: function () {
+
+    },
+    remove: function (index, array) {
+      if (index > -1) {
+        array.splice(index, 1);
+      }
+    },
+    reset: function () {
+      this.phoneNumber = false;
+      this.submitEmail = false;
+      this.submitName = false;
+    },
+    several: function (array) {
+      return (array.length > 1) && this.edit;
+    },
+    toggleEdit: function () {
+      sideNav.$emit("edit", true);
+      this.submit = true;
+    },
+    save: function () {
+      console.log(this.contact);
+      this.$http.put('http://localhost:3000/api/contact/' + this.contact._id, this.contact)
+        .then((data) => {
+          console.log(data);
+        }, (data) => {
+          console.log(data);
+        });
+      sideNav.$emit("save", true);
+      this.submit = true;
+    },
+    toggleNew: function () {
+      sideNav.$emit("toggleNew", true);
+    },
+    toggleEdit: function () {
+      sideNav.$emit("toggleEdit", true);
+    },
+
     validateEmail: function () {
       var good = true;
       this.contact.email.forEach(function(email_address) {
@@ -293,43 +331,6 @@ export default {
       } else {
         this.submitName = false;
       }
-    },
-    several: function (array) {
-      return (array.length > 1) && this.edit;
-    },
-    reset: function () {
-      this.phoneNumber = false;
-      this.submitEmail = false;
-      this.submitName = false;
-    },
-    toggleEdit: function () {
-      sideNav.$emit("edit", true);
-      this.submit = true;
-    },
-    remove: function (index, array) {
-      if (index > -1) {
-        array.splice(index, 1);
-      }
-    },
-    save: function () {
-      console.log(this.contact);
-      this.$http.put('http://localhost:3000/api/contact/' + this.contact._id, this.contact)
-        .then((data) => {
-          console.log(data);
-        }, (data) => {
-          console.log(data);
-        });
-      sideNav.$emit("save", true);
-      this.submit = true;
-    },
-    toggleNew: function () {
-      sideNav.$emit("toggleNew", true);
-    },
-    toggleEdit: function () {
-      sideNav.$emit("toggleEdit", true);
-    },
-    deleteContact: function () {
-
     },
   },
   props: {
