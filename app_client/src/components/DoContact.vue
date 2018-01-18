@@ -309,6 +309,9 @@ export default {
         array.splice(index, 1);
       }
     },
+    /**
+     * Used to reset the daa variable to default
+     */
     reset: function () {
       this.phoneNumber = false;
       this.submitEmail = false;
