@@ -317,6 +317,10 @@ export default {
       this.submitEmail = false;
       this.submitName = false;
     },
+    /**
+     * Used to save an already existing contact
+     * to the api
+     */
     save: function () {
       console.log(this.contact);
       this.$http.put('http://localhost:3000/api/contact/' + this.contact._id, this.contact)
