@@ -76,7 +76,7 @@ export default {
 /**
  * The side navigation menu
  */
-$green            : #4caf50;
+$green : #4caf50;
 
 .badge {
   border-radius : 50%;
