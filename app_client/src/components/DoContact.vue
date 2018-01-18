@@ -351,6 +351,9 @@ export default {
     toggleEdit: function () {
       sideNav.$emit("toggleEdit", true);
     },
+    /**
+     * Emits signal to change newCon property
+     */
     toggleNew: function () {
       sideNav.$emit("toggleNew", true);
     },
