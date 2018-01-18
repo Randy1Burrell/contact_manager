@@ -9,7 +9,8 @@
           <i class="fa fa-times" aria-hidden="true"></i>
         </li>
         <li v-show="newCon" class="action">
-          New Contact &nbsp; &nbsp; <i class="fa fa-address-card" aria-hidden="true"></i>
+          New Contact &nbsp; &nbsp;
+          <i class="fa fa-address-card" aria-hidden="true"></i>
         </li>
         <li v-if="view" class="action delete" @click="deleteContact()">
           Delete Contact <i class="fa fa-trash" aria-hidden="true"></i>
