@@ -8,10 +8,10 @@
 
     <!-- Displays contacts -->
     <div :class="{'container-fluid': true, shiftSearch: toggle.search}">
-      <app-contacts v-bind="toggle"
-                    v-for="contact in searchContact"
-                    :key="contact._id"
-                    v-bind:contact="contact">
+      <app-contacts v-bind         = "toggle"
+                    v-for          = "contact in searchContact"
+                    :key           = "contact._id"
+                    v-bind:contact = "contact">
       </app-contacts>
     </div>
     <!-- Displays a single contact and all its details -->
