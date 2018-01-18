@@ -161,7 +161,7 @@
     </form><!-- End contact form -->
 
     <!-- Submit section -->
-    <div class="submit" v-if="view || newCon">
+    <div class="submit" v-show="view || newCon">
       <a href="javascript:void(0)"
          class="action"
          @click.prevent="toggleEdit()"
