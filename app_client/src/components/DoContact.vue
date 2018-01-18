@@ -8,8 +8,12 @@
         <li @click="close()">
           <i class="fa fa-times" aria-hidden="true"></i>
         </li>
-        <li v-if="newCon" class="action">New Contact</li>
-        <li v-if="view" class="action delete" @click="deleteContact()">Delete Contact <i class="fa fa-trash" aria-hidden="true"></i></li>
+        <li v-if="newCon" class="action">
+          New Contact
+        </li>
+        <li v-if="view" class="action delete" @click="deleteContact()">
+          Delete Contact <i class="fa fa-trash" aria-hidden="true"></i>
+        </li>
       </ul>
     </div>
 
@@ -527,7 +531,7 @@ form {
       cursor        : pointer;
     }
 
-    li              : first-child {
+    li:first-child {
       float         : left;
       padding       : 10px 15px;
       margin-left   : 15px;
