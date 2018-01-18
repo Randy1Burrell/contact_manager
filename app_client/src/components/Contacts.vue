@@ -23,6 +23,10 @@ export default {
     }
   },
   directives: {
+    /**
+     * This directive is used to give h1 elements
+     * a bubble like effect.
+     */
     bubbles: {
       bind (el, binding, vnode) {
         el.style.color = "#fff"
