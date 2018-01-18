@@ -415,8 +415,6 @@ export default {
     newCon: {
       type: Boolean
     }
-  },
-  created: function () {
   }
 }
 </script>
