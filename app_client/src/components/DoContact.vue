@@ -25,13 +25,13 @@
       <div class="form-group row">
         <label class="sr-only" for="firstname">Firstname</label>
         <div class="col-6">
-          <input class="form-control"
-                 :disabled="!edit"
-                 id="firstname"
-                 @keyup="validateName()"
-                 placeholder="firstname"
-                 type="text"
-                 v-model="contact.firstname"
+          <input class       = "form-control"
+                 :disabled   = "!edit"
+                 id          = "firstname"
+                 @keyup      = "validateName()"
+                 placeholder = "firstname"
+                 type        = "text"
+                 v-model     = "contact.firstname"
                  required>
         </div>
         <label class="sr-only" for="lastname">Lastname</label>
