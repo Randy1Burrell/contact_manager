@@ -4,6 +4,7 @@
 
     <!-- Display this div when viewing a contact -->
     <div class="submit">
+
       <ul>
         <li @click="close()">
           <i class="fa fa-times" aria-hidden="true"></i>
@@ -13,18 +14,23 @@
           <i class="fa fa-address-card" aria-hidden="true"></i>
         </li>
         <li v-if="view" class="action delete" @click="deleteContact()">
-          Delete Contact <i class="fa fa-trash" aria-hidden="true"></i>
+          Delete Contact
+          <i class="fa fa-trash" aria-hidden="true"></i>
         </li>
       </ul>
+
     </div>
 
     <!-- This form shows the contact -->
     <form>
       <!-- Show name of contact -->
       <label>Name</label>
+
       <div class="form-group row">
+
         <label class="sr-only" for="firstname">Firstname</label>
         <div class="col-6">
+
           <input class       = "form-control"
                  :disabled   = "!edit"
                  id          = "firstname"
@@ -33,9 +39,12 @@
                  type        = "text"
                  v-model     = "contact.firstname"
                  required>
+
         </div>
+
         <label class="sr-only" for="lastname">Lastname</label>
         <div class="col-6">
+
           <input class       = "form-control"
                  :disabled   = "!edit"
                  id          = "lastname"
@@ -44,17 +53,21 @@
                  type        = "text"
                  v-model     = "contact.lastname"
                  required>
+
         </div>
       </div><!-- End contact name -->
 
       <!-- Show email addresses of contact -->
       <a hrea="javascript:void(0)">
         <label>Email</label>
+
         <i class          = "fa fa-plus-circle"
            aria-hidden    = "true"
            @click.prevent = "addEmail()"
            v-show         = "edit"></i>
+
       </a>
+
       <div class = "form-group row"
            v-for = "(email, index) in contact.email">
 
@@ -75,6 +88,7 @@
           <a href   = "javascript:void(0)"
              v-show = "several(contact.email)"
              @click = "remove(index, contact.email)">
+
             <i class="center-i fa fa-trash" aria-hidden="true"></i>
           </a>
 
@@ -150,28 +164,34 @@
 
       <!-- Show DOB of contact -->
       <label>Date Of Birth</label>
+
       <div class="form-group row">
 
         <!-- Screen reader label for DOB -->
         <label for="dob" class="sr-only">Date of Birth</label>
+
         <div class="col-12">
-          <datepicker input-class="form-control"
-                      id="dob"
-                      placeholder="DD/MM/YYYY"
-                      v-model="contact.dob"
-                      :disabled-picker="!edit">
+
+          <datepicker input-class      = "form-control"
+                      id               = "dob"
+                      placeholder      = "DD/MM/YYYY"
+                      v-model          = "contact.dob"
+                      :disabled-picker = "!edit">
           </datepicker>
+
         </div>
       </div>
     </form><!-- End contact form -->
 
     <!-- Submit section -->
     <div class="submit" v-show="view || newCon">
-      <a href="javascript:void(0)"
-         class="action"
-         @click.prevent="toggleEdit()"
-         v-show="!edit && view">
-        Edit <i class="fa fa-pencil" aria-hidden="true"></i>
+
+      <a href           = "javascript:void(0)"
+         class          = "action"
+         @click.prevent = "toggleEdit()"
+         v-show         = "!edit && view">
+        Edit
+        <i class="fa fa-pencil" aria-hidden="true"></i>
       </a>
 
       <!-- Save edits Button -->
