@@ -278,6 +278,10 @@ export default {
       sideNav.$emit("close", true);
       this.reset();
     },
+    /**
+     * This method submits post request to api to
+     * create a new contact
+     */
     createContact: function () {
       this.$http.post('http://localhost:3000/api/contact/', this.contact)
         .then((data) => {
