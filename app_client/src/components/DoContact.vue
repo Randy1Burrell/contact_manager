@@ -463,7 +463,7 @@ form {
 }
 
 .right {
-  box-shadow: -1px 0px 10px #ddd, 1px 0px 10px #ddd;
+  box-shadow       : -1px 0px 10px #ddd, 1px 0px 10px #ddd;
   position         : fixed;
   color            : $green;
   top              : 0px;
@@ -478,8 +478,8 @@ form {
   overflow-y       : scroll;
 
   .small-input {
-    width   : 93%;
-    display : inline;
+    width          : 93%;
+    display        : inline;
   }
 
 
@@ -494,17 +494,17 @@ form {
 }
 
 .delete {
-  background-color: red !important;
-  float: right;
-  opacity: 1;
-  transition: all 0.5s linear;
-  -webkit-transition: all 0.5s linear;
+  background-color   : red !important;
+  float              : right;
+  opacity            : 1;
+  transition         : all 0.5s linear;
+  -webkit-transition : all 0.5s linear;
 }
 
 .delete:hover {
-  background-color: red !important;
-  opacity: 0.5;
-  color: #fff;
+  background-color : red !important;
+  opacity          : 0.5;
+  color            : #fff;
 }
 
 .show , .edit {
@@ -514,33 +514,33 @@ form {
 }
 
 .submit {
-  text-align      : center;
-  width           : 100%;
-  height          : 80px;
+  text-align        : center;
+  width             : 100%;
+  height            : 80px;
 
   ul {
-    margin-bottom : 0px;
-    padding       : 0px;
+    margin-bottom   : 0px;
+    padding         : 0px;
 
     li {
-      display     : inline-block;
-      cursor: pointer;
+      display       : inline-block;
+      cursor        : pointer;
     }
 
-    li:first-child {
-      float: left;
-      padding: 10px 15px;
-      margin-left: 15px;
-      border: 1px solid $green;
-      border-radius: 50%;
+    li              : first-child {
+      float         : left;
+      padding       : 10px 15px;
+      margin-left   : 15px;
+      border        : 1px solid $green;
+      border-radius : 50%;
     }
   }
 }
 
 @media screen and (max-width: 991px) {
   .right {
-    padding : 100px 0px;
-    left    : 8px;
+    padding   : 100px 0px;
+    left      : 8px;
   }
 
   .action {
