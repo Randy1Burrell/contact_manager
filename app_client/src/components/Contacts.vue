@@ -51,6 +51,11 @@ export default {
     }
   },
   methods: {
+    /**
+     * Emit signal to view contact.
+     * This method has been used in other files,
+     * and will be put in a mixing file.
+     */
     viewContact: function() {
       sideNav.$emit("viewContact", this.contact);
     }
