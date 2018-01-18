@@ -68,11 +68,8 @@ export default {
     settings : {
       type   : Boolean
     }
-  },
-  created() {
   }
 }
-
 </script>
 
 <style lang="scss" scoped>
