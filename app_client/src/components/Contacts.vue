@@ -72,9 +72,15 @@ export default {
     openNav: {
       type: Boolean
     },
+    /**
+     * Contact to be displayed
+     */
     contact: {
       type: Object
     },
+    /**
+     * Add class to element if seach is true
+     */
     search: {
       type: Boolean
     }
