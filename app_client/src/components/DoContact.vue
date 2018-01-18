@@ -254,6 +254,11 @@ export default {
     addAddress: function () {
       this.contact.address.push("");
     },
+    /**
+     * This method adds a contact email
+     * to the email array and renders
+     * a new email address field on the form
+     */
     addEmail: function () {
       this.contact.email.push("");
     },
