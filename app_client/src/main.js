@@ -12,6 +12,6 @@ Vue.use(BootstrapVue);
 Vue.use(VueResource);
 
 new Vue({
-  el: '#app',
-  render: h => h(App)
+  el     : '#app',
+  render : h => h(App)
 })
