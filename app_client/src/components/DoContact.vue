@@ -136,7 +136,7 @@
 
           <!-- Remove address of contact -->
           <a href="javascript:void(0)"
-             v-if="several(contact.address)"
+             v-show="several(contact.address)"
              @click="remove(index, contact.address)">
             <i class="center-i fa fa-trash" aria-hidden="true"></i>
           </a>
