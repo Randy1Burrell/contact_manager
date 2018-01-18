@@ -8,6 +8,7 @@
         <li> {{ contact.firstname }} {{ contact.lastname }} </li>
         <li class="d-none d-sm-block"> {{ contact.email[0] }} </li>
         <li class="d-none d-lg-block"> {{ contact.phoneNumber[0] }} </li>
+        <li class="d-none d-xl-block"> {{ contact.address[0] }} </li>
       </ul>
     </div>
   </div>
@@ -29,6 +30,9 @@ export default {
      */
     bubbles: {
       bind (el, binding, vnode) {
+        /**
+         * Changing style of element
+         */
         el.style.color = "#fff"
         el.style.borderRadius = "50%";
         el.style.float = "left";
