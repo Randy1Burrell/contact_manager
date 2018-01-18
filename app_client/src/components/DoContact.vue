@@ -332,6 +332,16 @@ export default {
       sideNav.$emit("save", true);
       this.submit = true;
     },
+    /**
+     * Used to check if the length of an array is
+     * greater than zero and edit property that was
+     * to this component is also set to true.
+     * I used this method to determine is I should
+     * allow the delete button beside contacts email,
+     * phone number and address fields. If only one
+     * email, address or phone number field remain
+     * then the button disappears.
+     */
     several: function (array) {
       return (array.length > 1) && this.edit;
     },
