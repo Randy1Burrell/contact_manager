@@ -134,12 +134,13 @@
       </div><!-- End phone number -->
 
       <!-- Show addresses of contact -->
-      <a hrea="javascript:void(0)">
+      <a href="javascript:void(0)">
         <label>Address</label>
-        <i class="fa fa-plus-circle"
-           aria-hidden="true"
-           @click.prevent="addAddress()"
-           v-show="edit"></i>
+
+        <i class          = "fa fa-plus-circle"
+           aria-hidden    = "true"
+           @click.prevent = "addAddress()"
+           v-show         = "edit"></i>
       </a>
 
       <!-- Loop through addresses of contact and display them -->
