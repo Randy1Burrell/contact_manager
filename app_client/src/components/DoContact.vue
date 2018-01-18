@@ -395,6 +395,10 @@ export default {
       type: Object,
       required: true
     },
+    /**
+     * view is a boolean used to determine when to show
+     * contact details
+     */
     view: {
       type: Boolean
     },
