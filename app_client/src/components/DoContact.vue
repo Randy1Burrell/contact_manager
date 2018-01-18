@@ -103,7 +103,7 @@
 
           <!-- Remove phone number of contact-->
           <a href="javascript:void(0)"
-             v-if="several(contact.phoneNumber)"
+             v-show="several(contact.phoneNumber)"
              @click="remove(index, contact.phoneNumber)">
             <i class="center-i fa fa-trash" aria-hidden="true"></i>
           </a>
