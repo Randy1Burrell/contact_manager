@@ -388,6 +388,9 @@ export default {
     },
   },
   props: {
+    /**
+     * Contact object that is used to display contacts
+     */
     contact: {
       type: Object,
       required: true
