@@ -216,7 +216,7 @@ export default {
  * Make document and body 100%
  */
 .body, html {
-  height: 100%;
+  height : 100%;
 }
 
 /**
@@ -233,18 +233,18 @@ export default {
  * in box-size
  */
 * {
-  box-sizing: border-box !important;
+  box-sizing : border-box !important;
 }
 
 .container-fluid {
-  padding-top: 70px;
+  padding-top        : 70px;
   transition         : all 0.5s linear !important;
   -webkit-transition : all 0.5s linear !important;
 }
 
 @media screen and (max-width: 991px) {
   .shiftSearch {
-    padding-top: 110px !important;
+    padding-top : 110px !important;
   }
 }
 </style>
