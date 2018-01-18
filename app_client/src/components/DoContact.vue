@@ -246,6 +246,11 @@ export default {
     }
   },
   methods: {
+    /**
+     * This method adds a contact address
+     * to the address array and renders
+     * a new address field on the form
+     */
     addAddress: function () {
       this.contact.address.push("");
     },
