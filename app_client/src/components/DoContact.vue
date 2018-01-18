@@ -183,22 +183,23 @@
       </a>
 
       <!-- Save new contact button -->
-      <a v-show="newCon && submit"
-         class="action save"
-         href="javascript:void(0)"
-         @click.prevent="createContact()">
+      <a v-show         = "newCon && submit"
+         class          = "action save"
+         href           = "javascript:void(0)"
+         @click.prevent = "createContact()">
         Save
         <i class="fa fa-floppy-o" aria-hidden="true"></i>
       </a>
 
       <!-- Cancel the whole operation -->
-      <a id="cancel"
-         class="action"
-         href="javascript:void(0)"
-         @click.prevent="close()">
+      <a id             = "cancel"
+         class          = "action"
+         href           = "javascript:void(0)"
+         @click.prevent = "close()">
         Cancel
         <i class="fa fa-times" aria-hidden="true"></i>
       </a>
+
     </div> <!-- End submit section -->
   </div> <!-- End whole block -->
 </template> <!-- End template -->
