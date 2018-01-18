@@ -3,9 +3,13 @@
   <div :class="{right: true, show: newCon, edit: view, row: true}">
 
     <!-- Display this div when viewing a contact -->
-    <div class="submit" v-if="view">
+    <div class="submit">
       <ul>
-        <li class="action delete" @click.prevent="deleteContact()">Delete <i class="fa fa-trash" aria-hidden="true"></i></li>
+        <li @click="close()">
+          <i class="fa fa-times" aria-hidden="true"></i>
+        </li>
+        <li v-if="newCon" class="action">New Contact</li>
+        <li v-if="view" class="action delete" @click="deleteContact()">Delete Contact <i class="fa fa-trash" aria-hidden="true"></i></li>
       </ul>
     </div>
 
@@ -19,27 +23,32 @@
           <input class="form-control"
                  :disabled="!edit"
                  id="firstname"
+                 @keyup="validateName()"
                  placeholder="firstname"
                  type="text"
-                 v-model="contact.firstname">
+                 v-model="contact.firstname"
+                 required>
         </div>
         <label class="sr-only" for="lastname">Lastname</label>
         <div class="col-6">
           <input class="form-control"
                  :disabled="!edit"
                  id="lastname"
+                 @keyup="validateName()"
                  placeholder="lastname"
                  type="text"
-                 v-model="contact.lastname">
+                 v-model="contact.lastname"
+                 required>
         </div>
-      </div>
+      </div><!-- End contact name -->
 
       <!-- Show email addresses of contact -->
       <a hrea="javascript:void(0)">
         <label>Email</label>
         <i class="fa fa-plus-circle"
            aria-hidden="true"
-           @click.prevent="addEmail()"></i>
+           @click.prevent="addEmail()"
+           v-if="edit"></i>
       </a>
       <div class="form-group row"
            v-for="(email, index) in contact.email">
@@ -48,6 +57,7 @@
           <input :class="{'form-control': true, 'small-input': several(contact.email)}"
              :disabled="!edit"
              id="email"
+             v-on:keyup="validateEmail"
              placeholder="Ex: diddy@diddy.com"
              type="email"
              v-model="contact.email[index]"
@@ -60,14 +70,15 @@
             <i class="center-i fa fa-trash" aria-hidden="true"></i>
           </a>
         </div>
-      </div>
+      </div><!-- End email address -->
 
       <!-- Show phone numbers of contact -->
       <a hrea="javascript:void(0)">
         <label>Telephone Number</label>
         <i class="fa fa-plus-circle"
            aria-hidden="true"
-           @click.prevent="addPhoneNumber()"></i>
+           @click.prevent="addPhoneNumber()"
+           v-if="edit"></i>
       </a>
 
       <!-- Loop through telephone and display them -->
@@ -81,6 +92,7 @@
              :disabled="!edit"
              type="tel"
              id="telephone"
+             @keyup="validatePhoneNumber"
              placeholder="Ex: 1-(192)-304-3049"
              v-model="contact.phoneNumber[index]"
              required>
@@ -92,14 +104,15 @@
             <i class="center-i fa fa-trash" aria-hidden="true"></i>
           </a>
         </div>
-      </div>
+      </div><!-- End phone number -->
 
       <!-- Show addresses of contact -->
       <a hrea="javascript:void(0)">
         <label>Address</label>
         <i class="fa fa-plus-circle"
            aria-hidden="true"
-           @click.prevent="addAddress()"></i>
+           @click.prevent="addAddress()"
+           v-if="edit"></i>
       </a>
 
       <!-- Loop through addresses of contact and display them -->
@@ -124,7 +137,7 @@
             <i class="center-i fa fa-trash" aria-hidden="true"></i>
           </a>
         </div>
-      </div>
+      </div><!-- End addresses -->
 
       <!-- Show DOB of contact -->
       <label>Date Of Birth</label>
@@ -136,12 +149,14 @@
           <datepicker input-class="form-control"
                       id="dob"
                       placeholder="DD/MM/YYYY"
-                      v-model="contact.dob">
+                      v-model="contact.dob"
+                      :disabled-picker="!edit">
           </datepicker>
         </div>
       </div>
-    </form>
+    </form><!-- End contact form -->
 
+    <!-- Submit section -->
     <div class="submit" v-if="view || newCon">
       <a href="javascript:void(0)"
          class="action"
@@ -154,12 +169,12 @@
       <a href="javascript:void(0)"
          class="action save"
          @click.prevent="save()"
-         v-else-if="edit && view">
+         v-else-if="edit && view && submit">
         Save <i class="fa fa-floppy-o" aria-hidden="true"></i>
       </a>
 
       <!-- Save new contact button -->
-      <a v-if="newCon"
+      <a v-if="newCon && submit"
          class="action save"
          href="javascript:void(0)"
          @click.prevent="createContact()">
@@ -181,6 +196,9 @@
 
 
 <script>
+/**
+ * Import vuejs-datepicker to use in form
+ */
 import Datepicker from 'vuejs-datepicker'
 import {sideNav} from '../bus/navigation'
 
@@ -191,12 +209,48 @@ export default {
   },
   data () {
     return {
-      email: this.severalEmail
+      submitEmail: false,
+      submitName: false,
+      phoneNumber: false
     }
   },
   computed: {
+    submit: {
+      get: function () {
+        this.validateName();
+        this.validateEmail();
+        this.validatePhoneNumber();
+        return this.submitEmail && this.submitName && this.phoneNumber;
+      }
+    }
   },
   methods: {
+    validateEmail: function () {
+      var good = true;
+      this.contact.email.forEach(function(email_address) {
+        if (!(/[\w.+-]+@[\w.+-]+\.[a-zA-Z0-9]{2,4}(,\s*)*/ig.test(email_address))) {
+          good = false;
+        }
+      });
+      this.submitEmail = good;
+    },
+    validatePhoneNumber: function () {
+      var good = true;
+      this.contact.phoneNumber.forEach(function(number) {
+        number = number.replace(/[^\d]/g, '');
+        if ((number.length < 6 || number.length > 12)) {
+          good = false;
+        }
+      });
+      this.phoneNumber = good;
+    },
+    validateName: function () {
+      if (this.contact.firstname.length > 0 || this.contact.lastname.length > 0) {
+        this.submitName = true;
+      } else {
+        this.submitName = false;
+      }
+    },
     several: function (array) {
       return (array.length > 1) && this.edit;
     },
@@ -205,13 +259,18 @@ export default {
     },
     addEmail: function () {
       this.contact.email.push("");
-      console.log(this.severalEmail);
     },
     addPhoneNumber: function () {
       this.contact.phoneNumber.push("");
     },
     close: function () {
       sideNav.$emit("close", true);
+      this.reset();
+    },
+    reset: function () {
+      this.phoneNumber = false;
+      this.submitEmail = false;
+      this.submitName = false;
     },
     createContact: function () {
       this.$http.post('http://localhost:3000/api/contact/', this.contact)
@@ -220,9 +279,11 @@ export default {
         }, (data) => {
           console.log(data);
         });
+      this.submit = true;
     },
     toggleEdit: function () {
       sideNav.$emit("edit", true);
+      this.submit = true;
     },
     remove: function (index, array) {
       if (index > -1) {
@@ -238,6 +299,7 @@ export default {
           console.log(data);
         });
       sideNav.$emit("save", true);
+      this.submit = true;
     },
     toggleNew: function () {
       sideNav.$emit("toggleNew", true);
@@ -247,7 +309,7 @@ export default {
     },
     deleteContact: function () {
 
-    }
+    },
   },
   props: {
     contact: {
@@ -313,6 +375,7 @@ form {
 }
 
 .right {
+  box-shadow: -1px 0px 10px #ddd, 1px 0px 10px #ddd;
   position         : fixed;
   color            : $green;
   top              : 0px;
@@ -343,7 +406,17 @@ form {
 }
 
 .delete {
+  background-color: red !important;
   float: right;
+  opacity: 1;
+  transition: all 0.5s linear;
+  -webkit-transition: all 0.5s linear;
+}
+
+.delete:hover {
+  background-color: red !important;
+  opacity: 0.5;
+  color: #fff;
 }
 
 .show , .edit {
@@ -363,6 +436,15 @@ form {
 
     li {
       display     : inline-block;
+      cursor: pointer;
+    }
+
+    li:first-child {
+      float: left;
+      padding: 10px 15px;
+      margin-left: 15px;
+      border: 1px solid $green;
+      border-radius: 50%;
     }
   }
 }
