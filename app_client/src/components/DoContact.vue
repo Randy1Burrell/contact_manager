@@ -291,6 +291,9 @@ export default {
         });
       this.submit = true;
     },
+    /**
+     * This method is used to delete a contact
+     */
     deleteContact: function () {
 
     },
