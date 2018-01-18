@@ -345,6 +345,9 @@ export default {
     several: function (array) {
       return (array.length > 1) && this.edit;
     },
+    /**
+     * Emits signal to change edit property
+     */
     toggleEdit: function () {
       sideNav.$emit("toggleEdit", true);
     },
