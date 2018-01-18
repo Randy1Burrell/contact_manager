@@ -61,6 +61,10 @@ export default {
     }
   },
   props: {
+    /**
+     * Used to tell when sidebar navigation has been
+     * opened.
+     */
     openNav: {
       type: Boolean
     },
