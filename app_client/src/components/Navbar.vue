@@ -38,11 +38,11 @@ export default {
     };
   },
   props: {
-    search: {
-      type: Boolean
+    search : {
+      type : Boolean
     },
-    newCon: {
-      type: Boolean
+    newCon : {
+      type : Boolean
     }
   },
   methods: {
