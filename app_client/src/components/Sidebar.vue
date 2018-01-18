@@ -82,14 +82,14 @@ export default {
 $green            : #4caf50;
 
 .badge {
-  border-radius: 50%;
+  border-radius : 50%;
 }
 
 /**
  * Class to show div
  */
 .show {
-  width: 100%;
+  width : 100%;
 }
 
 .sidenav {
