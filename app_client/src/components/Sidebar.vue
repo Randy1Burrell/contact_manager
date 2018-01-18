@@ -38,35 +38,35 @@ export default {
     }
   },
   methods: {
-    closeNav : () => {
+    closeNav: () => {
       sideNav.$emit("toggleSideNav", true);
     },
-    toggleHelp : () => {
+    toggleHelp: () => {
       sideNav.$emit("toggleHelp", true);
     },
-    toggleSettings : () => {
+    toggleSettings: () => {
       sideNav.$emit("toggleSettings", true);
     },
     /**
      * Emits event to create new contact
      */
-    toggleNew : function () {
+    toggleNew: function () {
       sideNav.$emit("toggleNew", true);
     },
   },
   props: {
     help: {
-      type: Boolean
+      type : Boolean
     },
     openNav: {
       type     : Boolean,
       required : true
     },
-    newCon: {
-      type: Boolean
+    newCon : {
+      type : Boolean
     },
-    settings: {
-      type: Boolean
+    settings : {
+      type   : Boolean
     }
   },
   created() {
