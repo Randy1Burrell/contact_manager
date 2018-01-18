@@ -160,9 +160,10 @@
              required>
 
           <!-- Remove address of contact -->
-          <a href="javascript:void(0)"
-             v-show="several(contact.address)"
-             @click="remove(index, contact.address)">
+          <a href   = "javascript:void(0)"
+             v-show = "several(contact.address)"
+             @click = "remove(index, contact.address)">
+
             <i class="center-i fa fa-trash" aria-hidden="true"></i>
           </a>
         </div>
