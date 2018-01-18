@@ -98,32 +98,36 @@
       <!-- Show phone numbers of contact -->
       <a hrea="javascript:void(0)">
         <label>Telephone Number</label>
-        <i class="fa fa-plus-circle"
-           aria-hidden="true"
-           @click.prevent="addPhoneNumber()"
-           v-show="edit"></i>
+
+        <i class          = "fa fa-plus-circle"
+           aria-hidden    = "true"
+           @click.prevent = "addPhoneNumber()"
+           v-show         = "edit"></i>
+
       </a>
 
       <!-- Loop through telephone and display them -->
-      <div class="form-group row"
-           v-for="(number, index) in contact.phoneNumber">
+      <div class = "form-group row"
+           v-for = "(number, index) in contact.phoneNumber">
 
         <!-- Screen reader label for Telephone -->
         <label for="telephone" class="sr-only">Telephone</label>
         <div class="col-12">
-          <input :class="{'form-control': true, 'small-input': several(contact.phoneNumber)}"
-             :disabled="!edit"
-             type="tel"
-             id="telephone"
-             @keyup="validatePhoneNumber"
-             placeholder="Ex: 1-(192)-304-3049"
-             v-model="contact.phoneNumber[index]"
+
+          <input :class  = "{'form-control': true, 'small-input': several(contact.phoneNumber)}"
+             :disabled   = "!edit"
+             type        = "tel"
+             id          = "telephone"
+             @keyup      = "validatePhoneNumber"
+             placeholder = "Ex: 1-(192)-304-3049"
+             v-model     = "contact.phoneNumber[index]"
              required>
 
           <!-- Remove phone number of contact-->
-          <a href="javascript:void(0)"
-             v-show="several(contact.phoneNumber)"
-             @click="remove(index, contact.phoneNumber)">
+          <a href   = "javascript:void(0)"
+             v-show = "several(contact.phoneNumber)"
+             @click = "remove(index, contact.phoneNumber)">
+
             <i class="center-i fa fa-trash" aria-hidden="true"></i>
           </a>
         </div>
