@@ -8,7 +8,7 @@
         <li @click="close()">
           <i class="fa fa-times" aria-hidden="true"></i>
         </li>
-        <li v-if="newCon" class="action">
+        <li v-show="newCon" class="action">
           New Contact
         </li>
         <li v-if="view" class="action delete" @click="deleteContact()">
@@ -52,7 +52,7 @@
         <i class="fa fa-plus-circle"
            aria-hidden="true"
            @click.prevent="addEmail()"
-           v-if="edit"></i>
+           v-show="edit"></i>
       </a>
       <div class="form-group row"
            v-for="(email, index) in contact.email">
@@ -69,7 +69,7 @@
 
           <!-- Remove email address of contact-->
           <a href="javascript:void(0)"
-             v-if="several(contact.email)"
+             v-show="several(contact.email)"
              @click="remove(index, contact.email)">
             <i class="center-i fa fa-trash" aria-hidden="true"></i>
           </a>
@@ -82,7 +82,7 @@
         <i class="fa fa-plus-circle"
            aria-hidden="true"
            @click.prevent="addPhoneNumber()"
-           v-if="edit"></i>
+           v-show="edit"></i>
       </a>
 
       <!-- Loop through telephone and display them -->
