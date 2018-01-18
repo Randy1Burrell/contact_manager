@@ -33,7 +33,7 @@ export default {
         /**
          * Changing style of element
          */
-        el.style.color = "#fff"
+        el.style.color = "#fff";
         el.style.borderRadius = "50%";
         el.style.float = "left";
         el.style.display = "inline-block";
