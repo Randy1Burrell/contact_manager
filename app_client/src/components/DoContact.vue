@@ -281,13 +281,6 @@ export default {
       this.submitEmail = false;
       this.submitName = false;
     },
-    several: function (array) {
-      return (array.length > 1) && this.edit;
-    },
-    toggleEdit: function () {
-      sideNav.$emit("edit", true);
-      this.submit = true;
-    },
     save: function () {
       console.log(this.contact);
       this.$http.put('http://localhost:3000/api/contact/' + this.contact._id, this.contact)
@@ -299,7 +292,13 @@ export default {
       sideNav.$emit("save", true);
       this.submit = true;
     },
-    toggleNew: function () {
+    several: function (array) {
+      return (array.length > 1) && this.edit;
+    },
+    toggleEdit: function () {
+      sideNav.$emit("edit", true);
+    },
+  toggleNew: function () {
       sideNav.$emit("toggleNew", true);
     },
     toggleEdit: function () {
