@@ -85,8 +85,6 @@ export default {
       type: Boolean
     }
   },
-  created: function () {
-  }
 }
 </script>
 
