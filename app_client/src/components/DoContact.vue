@@ -270,6 +270,10 @@ export default {
     addPhoneNumber: function () {
       this.contact.phoneNumber.push("");
     },
+    /**
+     * This method emits signal to close
+     * view contact component
+     */
     close: function () {
       sideNav.$emit("close", true);
       this.reset();
