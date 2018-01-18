@@ -357,6 +357,9 @@ export default {
     toggleNew: function () {
       sideNav.$emit("toggleNew", true);
     },
+    /**
+     * Checking if all inputs are valid
+     */
     validateEmail: function () {
       var good = true;
       this.contact.email.forEach(function(email_address) {
