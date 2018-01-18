@@ -134,7 +134,7 @@ a .input-group input {
  * Style the inputs inside tbhe navigation bar
  */
 .topnav a, input[type="text"] {
-  font-variant    : all-petite-caps;
+  font-variant : all-petite-caps;
 }
 
 /**
@@ -272,7 +272,7 @@ input[type="text"] {
   top      : 0;
 }
 .topnav.responsive a {
-  display    : inline-block;
+  display : inline-block;
 }
 }
 </style>
