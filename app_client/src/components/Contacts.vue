@@ -33,16 +33,16 @@ export default {
         /**
          * Changing style of element
          */
-        el.style.color = "#fff";
-        el.style.borderRadius = "50%";
-        el.style.float = "left";
-        el.style.display = "inline-block";
+        el.style.color           = "#fff";
+        el.style.borderRadius    = "50%";
+        el.style.float           = "left";
+        el.style.display         = "inline-block";
         el.style.backgroundColor = "#" + Math.random().toString().slice(2,8);
-        el.style.borderRadius = "50%";
-        el.style.margin = "0px 10px 0px -25px";
-        el.style.width = "50px";
-        el.style.height = "50px";
-        el.style.padding = "0px 4px 4px";
+        el.style.borderRadius    = "50%";
+        el.style.margin          = "0px 10px 0px -25px";
+        el.style.width           = "50px";
+        el.style.height          = "50px";
+        el.style.padding         = "0px 4px 4px";
       }
     }
   },
