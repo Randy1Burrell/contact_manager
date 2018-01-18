@@ -402,6 +402,10 @@ export default {
     view: {
       type: Boolean
     },
+    /**
+     * Edit boolean tells this component to disable or enable
+     * fields
+     */
     edit: {
       type: Boolean
     },
