@@ -165,7 +165,7 @@
       <a href="javascript:void(0)"
          class="action"
          @click.prevent="toggleEdit()"
-         v-if="!edit && view">
+         v-show="!edit && view">
         Edit <i class="fa fa-pencil" aria-hidden="true"></i>
       </a>
 
@@ -173,12 +173,12 @@
       <a href="javascript:void(0)"
          class="action save"
          @click.prevent="save()"
-         v-else-if="edit && view && submit">
+         v-show="edit && view && submit">
         Save <i class="fa fa-floppy-o" aria-hidden="true"></i>
       </a>
 
       <!-- Save new contact button -->
-      <a v-if="newCon && submit"
+      <a v-show="newCon && submit"
          class="action save"
          href="javascript:void(0)"
          @click.prevent="createContact()">
