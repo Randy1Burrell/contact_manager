@@ -298,7 +298,7 @@ export default {
     toggleEdit: function () {
       sideNav.$emit("edit", true);
     },
-  toggleNew: function () {
+    toggleNew: function () {
       sideNav.$emit("toggleNew", true);
     },
     toggleEdit: function () {
