@@ -250,9 +250,9 @@ export default {
   },
   data () {
     return {
-      submitEmail: false,
-      submitName: false,
-      phoneNumber: false
+      submitEmail : false,
+      submitName  : false,
+      phoneNumber : false
     }
   },
   computed: {
