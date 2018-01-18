@@ -259,7 +259,15 @@ export default {
       sideNav.$emit("close", true);
       this.reset();
     },
-
+    createContact: function () {
+      this.$http.post('http://localhost:3000/api/contact/', this.contact)
+        .then((data) => {
+          console.log(data);
+        }, (data) => {
+          console.log(data);
+        });
+      this.submit = true;
+    },
     validateEmail: function () {
       var good = true;
       this.contact.email.forEach(function(email_address) {
@@ -293,15 +301,6 @@ export default {
       this.phoneNumber = false;
       this.submitEmail = false;
       this.submitName = false;
-    },
-    createContact: function () {
-      this.$http.post('http://localhost:3000/api/contact/', this.contact)
-        .then((data) => {
-          console.log(data);
-        }, (data) => {
-          console.log(data);
-        });
-      this.submit = true;
     },
     toggleEdit: function () {
       sideNav.$emit("edit", true);
