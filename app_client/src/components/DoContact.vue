@@ -297,6 +297,13 @@ export default {
     deleteContact: function () {
 
     },
+    /**
+     * This method remove an element form an array
+     * It is used to remove alements from contacts
+     * {phoneNumber, email and address}, then vue
+     * re-renders the form to show the what the
+     * contact currently looks like
+     */
     remove: function (index, array) {
       if (index > -1) {
         array.splice(index, 1);
