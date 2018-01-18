@@ -409,6 +409,9 @@ export default {
     edit: {
       type: Boolean
     },
+    /**
+     * newCon boolean tells the component which save button to display
+     */
     newCon: {
       type: Boolean
     }
