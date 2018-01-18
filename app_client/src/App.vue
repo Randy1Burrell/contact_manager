@@ -158,9 +158,9 @@ export default {
     // Toggle new when event is received
     sideNav.$on("toggleNew", (event) => {
       this.toggle.newCon = !this.toggle.newCon;
-      this.toggle.view = false;
-      this.toggle.edit = true;
-      this.contact = {
+      this.toggle.view   = false;
+      this.toggle.edit   = true;
+      this.contact       = {
         firstname: '',
         lastname: '',
         dob: '',
@@ -181,9 +181,9 @@ export default {
     // view contact
     sideNav.$on("viewContact", (contact) => {
       this.toggle.newCon = false;
-      this.toggle.view = true;
-      this.toggle.edit = false;
-      this.contact = contact;
+      this.toggle.view   = true;
+      this.toggle.edit   = false;
+      this.contact       = contact;
     });
 
     // edit contact
@@ -198,9 +198,9 @@ export default {
 
     // Save contact
     sideNav.$on("close", (event) => {
-      this.toggle.view = false;
+      this.toggle.view   = false;
       this.toggle.newCon = false;
-      this.toggle.edit = false;
+      this.toggle.edit   = false;
     });
 
     // Get contacts from server
