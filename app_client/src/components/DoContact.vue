@@ -310,6 +310,13 @@ export default {
       });
       this.submitEmail = good;
     },
+    validateName: function () {
+      if (this.contact.firstname.length > 0 || this.contact.lastname.length > 0) {
+        this.submitName = true;
+      } else {
+        this.submitName = false;
+      }
+    },
     validatePhoneNumber: function () {
       var good = true;
       this.contact.phoneNumber.forEach(function(number) {
@@ -319,13 +326,6 @@ export default {
         }
       });
       this.phoneNumber = good;
-    },
-    validateName: function () {
-      if (this.contact.firstname.length > 0 || this.contact.lastname.length > 0) {
-        this.submitName = true;
-      } else {
-        this.submitName = false;
-      }
     },
   },
   props: {
