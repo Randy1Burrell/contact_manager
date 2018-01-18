@@ -58,7 +58,7 @@
       </div><!-- End contact name -->
 
       <!-- Show email addresses of contact -->
-      <a hrea="javascript:void(0)">
+      <a href="javascript:void(0)">
         <label>Email</label>
 
         <i class          = "fa fa-plus-circle"
@@ -96,7 +96,7 @@
       </div><!-- End email address -->
 
       <!-- Show phone numbers of contact -->
-      <a hrea="javascript:void(0)">
+      <a href="javascript:void(0)">
         <label>Telephone Number</label>
 
         <i class          = "fa fa-plus-circle"
