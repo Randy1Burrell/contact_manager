@@ -228,9 +228,19 @@ export default {
        * have been filled out
        */
       get: function () {
+        /**
+         * Call functions that will parse values
+         * from emails fields, name fields and
+         * phone number fields and set booleans
+         * accordingly.
+         */
         this.validateName();
         this.validateEmail();
         this.validatePhoneNumber();
+        /**
+         * Returning the combined bool of values
+         * that has been set above
+         */
         return this.submitEmail && this.submitName && this.phoneNumber;
       }
     }
