@@ -200,6 +200,9 @@
  * Import vuejs-datepicker to use in form
  */
 import Datepicker from 'vuejs-datepicker'
+/**
+ * Get event bus here
+ */
 import {sideNav} from '../bus/navigation'
 
 export default {
@@ -215,7 +218,15 @@ export default {
     }
   },
   computed: {
+    /**
+     * This computed property will manage
+     * when save button will be displayed
+     */
     submit: {
+      /**
+       * Getter returns tru if all required fields
+       * have been filled out
+       */
       get: function () {
         this.validateName();
         this.validateEmail();
