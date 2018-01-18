@@ -69,20 +69,20 @@ export default {
      * Used to tell when sidebar navigation has been
      * opened.
      */
-    openNav: {
-      type: Boolean
+    openNav : {
+      type  : Boolean
     },
     /**
      * Contact to be displayed
      */
-    contact: {
-      type: Object
+    contact : {
+      type  : Object
     },
     /**
      * Add class to element if seach is true
      */
-    search: {
-      type: Boolean
+    search : {
+      type : Boolean
     }
   },
 }
@@ -109,32 +109,32 @@ div {
   }
 
   .chip ul {
-    overflow-x       : hidden;
-    padding-left: 0px;
-    margin: 0px;
+    overflow-x   : hidden;
+    padding-left : 0px;
+    margin       : 0px;
   }
 
   @media screen and (min-width: 592px) {
     .chip ul li {
-      display          : inline-block !important;
-      overflow-x       : hidden;
-      min-width        : 180px;
-      max-width        : 300px;
+      display    : inline-block !important;
+      overflow-x : hidden;
+      min-width  : 180px;
+      max-width  : 300px;
     }
   }
 }
 
 .cont-container {
-  color: #777;
-  margin : 0px 0px 3px 0px;
-  font-size   : 14px;
-  font-variant: all-petite-caps;
+  color              : #777;
+  margin             : 0px 0px 3px 0px;
+  font-size          : 14px;
+  font-variant       : all-petite-caps;
   transition         : all 0.5s linear !important;
   -webkit-transition : all 0.5s linear !important;
 }
 
 .shift {
-  margin-left: 200px !important;
+  margin-left : 200px !important;
 }
 
 @media screen and (max-width: 991px) {
