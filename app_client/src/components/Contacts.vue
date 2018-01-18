@@ -43,6 +43,9 @@ export default {
     }
   },
   filters: {
+    /**
+     * Get the first letter of a string
+     */
     getLetter(value) {
       return value.slice(0, 1);
     }
