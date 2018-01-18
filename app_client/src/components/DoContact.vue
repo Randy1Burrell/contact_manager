@@ -296,15 +296,11 @@ export default {
       return (array.length > 1) && this.edit;
     },
     toggleEdit: function () {
-      sideNav.$emit("edit", true);
+      sideNav.$emit("toggleEdit", true);
     },
     toggleNew: function () {
       sideNav.$emit("toggleNew", true);
     },
-    toggleEdit: function () {
-      sideNav.$emit("toggleEdit", true);
-    },
-
     validateEmail: function () {
       var good = true;
       this.contact.email.forEach(function(email_address) {
