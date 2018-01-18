@@ -144,18 +144,19 @@
       </a>
 
       <!-- Loop through addresses of contact and display them -->
-      <div class="form-group row"
-           v-for="(address, index) in contact.address">
+      <div class = "form-group row"
+           v-for = "(address, index) in contact.address">
 
         <!-- Screen reader label for address -->
         <label for="address" class="sr-only">Address</label>
         <div class="col-12">
-          <input :class="{'form-control': true, 'small-input': several(contact.address)}"
-             :disabled="!edit"
-             id="address"
-             placeholder="Address: 22 North St."
-             type="text"
-             v-model="contact.address[index]"
+
+          <input :class  = "{'form-control': true, 'small-input': several(contact.address)}"
+             :disabled   = "!edit"
+             id          = "address"
+             placeholder = "Address: 22 North St."
+             type        = "text"
+             v-model     = "contact.address[index]"
              required>
 
           <!-- Remove address of contact -->
