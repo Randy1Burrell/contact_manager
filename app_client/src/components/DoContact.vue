@@ -36,13 +36,13 @@
         </div>
         <label class="sr-only" for="lastname">Lastname</label>
         <div class="col-6">
-          <input class="form-control"
-                 :disabled="!edit"
-                 id="lastname"
-                 @keyup="validateName()"
-                 placeholder="lastname"
-                 type="text"
-                 v-model="contact.lastname"
+          <input class       = "form-control"
+                 :disabled   = "!edit"
+                 id          = "lastname"
+                 @keyup      = "validateName()"
+                 placeholder = "lastname"
+                 type        = "text"
+                 v-model     = "contact.lastname"
                  required>
         </div>
       </div><!-- End contact name -->
@@ -50,30 +50,34 @@
       <!-- Show email addresses of contact -->
       <a hrea="javascript:void(0)">
         <label>Email</label>
-        <i class="fa fa-plus-circle"
-           aria-hidden="true"
-           @click.prevent="addEmail()"
-           v-show="edit"></i>
+        <i class          = "fa fa-plus-circle"
+           aria-hidden    = "true"
+           @click.prevent = "addEmail()"
+           v-show         = "edit"></i>
       </a>
-      <div class="form-group row"
-           v-for="(email, index) in contact.email">
+      <div class = "form-group row"
+           v-for = "(email, index) in contact.email">
+
         <label for="email" class="sr-only">Email</label>
+
         <div class="col-12">
+
           <input :class="{'form-control': true, 'small-input': several(contact.email)}"
-             :disabled="!edit"
-             id="email"
-             v-on:keyup="validateEmail"
-             placeholder="Ex: diddy@diddy.com"
-             type="email"
-             v-model="contact.email[index]"
+             :disabled   = "!edit"
+             id          = "email"
+             v-on:keyup  = "validateEmail"
+             placeholder = "Ex: diddy@diddy.com"
+             type        = "email"
+             v-model     = "contact.email[index]"
              required>
 
           <!-- Remove email address of contact-->
-          <a href="javascript:void(0)"
-             v-show="several(contact.email)"
-             @click="remove(index, contact.email)">
+          <a href   = "javascript:void(0)"
+             v-show = "several(contact.email)"
+             @click = "remove(index, contact.email)">
             <i class="center-i fa fa-trash" aria-hidden="true"></i>
           </a>
+
         </div>
       </div><!-- End email address -->
 
