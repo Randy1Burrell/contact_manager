@@ -175,11 +175,12 @@
       </a>
 
       <!-- Save edits Button -->
-      <a href="javascript:void(0)"
-         class="action save"
-         @click.prevent="save()"
-         v-show="edit && view && submit">
-        Save <i class="fa fa-floppy-o" aria-hidden="true"></i>
+      <a href           = "javascript:void(0)"
+         class          = "action save"
+         @click.prevent = "save()"
+         v-show         = "edit && view && submit">
+        Save
+        <i class="fa fa-floppy-o" aria-hidden="true"></i>
       </a>
 
       <!-- Save new contact button -->
