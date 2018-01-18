@@ -224,7 +224,7 @@ export default {
      */
     submit: {
       /**
-       * Getter returns tru if all required fields
+       * Getter returns true if all required fields
        * have been filled out
        */
       get: function () {
