@@ -159,6 +159,7 @@ export default {
     sideNav.$on("toggleNew", (event) => {
       this.toggle.newCon = !this.toggle.newCon;
       this.toggle.view = false;
+      this.toggle.edit = true;
       this.contact = {
         firstname: '',
         lastname: '',
@@ -181,6 +182,7 @@ export default {
     sideNav.$on("viewContact", (contact) => {
       this.toggle.newCon = false;
       this.toggle.view = true;
+      this.toggle.edit = false;
       this.contact = contact;
     });
 
