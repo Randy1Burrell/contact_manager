@@ -124,11 +124,11 @@ a .input-group input {
  * Add a black background color to the top navigation
  */
 .topnav {
-  background-color : $bg-color;
-  overflow         : hidden;
-  position         : fixed !important;
-  width            : 100%;
-  z-index          : 1;
+  background-color           : $bg-color;
+  overflow                   : hidden;
+  position                   : fixed !important;
+  width                      : 100%;
+  z-index                    : 1;
   transition                 : 0.5s; /* 0.5 second transition effect to slide in the sidenav */
   -webkit-transition         : 0.5s;
   transition-timing-function : linear;
@@ -145,13 +145,13 @@ a .input-group input {
  * Style the links inside tbhe navigation bar
  */
 .topnav a {
-  color           : $green;
-  display         : block;
-  float           : left;
-  font-size       : 17px;
-  padding         : 14px 16px;
-  text-align      : center;
-  text-decoration : none;
+  color                      : $green;
+  display                    : block;
+  float                      : left;
+  font-size                  : 17px;
+  padding                    : 14px 16px;
+  text-align                 : center;
+  text-decoration            : none;
   transition                 : 0.5s !important;
   -webkit-transition         : 0.5s !important;
   transition-timing-function : linear !important;
