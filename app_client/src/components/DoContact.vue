@@ -246,6 +246,20 @@ export default {
     }
   },
   methods: {
+    addAddress: function () {
+      this.contact.address.push("");
+    },
+    addEmail: function () {
+      this.contact.email.push("");
+    },
+    addPhoneNumber: function () {
+      this.contact.phoneNumber.push("");
+    },
+    close: function () {
+      sideNav.$emit("close", true);
+      this.reset();
+    },
+
     validateEmail: function () {
       var good = true;
       this.contact.email.forEach(function(email_address) {
@@ -274,19 +288,6 @@ export default {
     },
     several: function (array) {
       return (array.length > 1) && this.edit;
-    },
-    addAddress: function () {
-      this.contact.address.push("");
-    },
-    addEmail: function () {
-      this.contact.email.push("");
-    },
-    addPhoneNumber: function () {
-      this.contact.phoneNumber.push("");
-    },
-    close: function () {
-      sideNav.$emit("close", true);
-      this.reset();
     },
     reset: function () {
       this.phoneNumber = false;
