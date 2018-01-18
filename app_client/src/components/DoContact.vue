@@ -469,8 +469,13 @@ form {
 
   a {
     width   : 90%;
+
     i {
       float : right;
+    }
+
+    label {
+      color: $green;
     }
   }
 }
