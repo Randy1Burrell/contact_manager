@@ -4,7 +4,7 @@
     <app-navbar v-bind="toggle"></app-navbar>
 
     <!-- Displays sidebar -->
-    <app-sidebar v-bind="toggle"></app-sidebar>
+    <app-sidebar v-bind="toggle" v-bind:count="contacts.length"></app-sidebar>
 
     <!-- Displays contacts -->
     <div :class="{'container-fluid': true, shiftSearch: toggle.search}">
@@ -134,6 +134,11 @@ export default {
         });
       }
     },
+    countContacts: {
+      get: function () {
+        return this.contacts.length;
+      }
+    }
   },
   methods: {
     showMessage: function(timeOut) {
