@@ -179,7 +179,8 @@
 
         <div class="col-12">
 
-          <datepicker input-class      = "form-control"
+          <datepicker
+             input-class      = "form-control"
              id               = "dob"
              placeholder      = "DD/MM/YYYY"
              v-model          = "contact.dob"
