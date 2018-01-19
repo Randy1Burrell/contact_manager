@@ -75,7 +75,7 @@
 
         <div class="col-12">
 
-          <input :class="{'form-control': true, 'small-input': several(contact.email)}"
+          <input :class  = "{'form-control': true, 'small-input': several(contact.email)}"
              :disabled   = "!edit"
              id          = "email"
              v-on:keyup  = "validateEmail"
