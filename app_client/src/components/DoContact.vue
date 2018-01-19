@@ -69,7 +69,7 @@
       </a>
 
       <div class = "form-group row"
-         v-for = "(email, index) in contact.email">
+         v-for   = "(email, index) in contact.email">
 
         <label for="email" class="sr-only">Email</label>
 
