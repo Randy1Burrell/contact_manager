@@ -35,7 +35,7 @@ var badRequest = {
  * Resource not found message
  */
 var notFound = {
-  "mesage": "The resource you are searching for was not found"
+  "message": "The resource you are searching for cannot be found"
 };
 
 /**
