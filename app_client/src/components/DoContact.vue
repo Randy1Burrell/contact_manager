@@ -32,13 +32,13 @@
         <div class="col-6">
 
           <input class       = "form-control"
-                 :disabled   = "!edit"
-                 id          = "firstname"
-                 @keyup      = "validateName()"
-                 placeholder = "firstname"
-                 type        = "text"
-                 v-model     = "contact.firstname"
-                 required>
+             :disabled   = "!edit"
+             id          = "firstname"
+             @keyup      = "validateName()"
+             placeholder = "firstname"
+             type        = "text"
+             v-model     = "contact.firstname"
+             required>
 
         </div>
 
@@ -46,13 +46,13 @@
         <div class="col-6">
 
           <input class       = "form-control"
-                 :disabled   = "!edit"
-                 id          = "lastname"
-                 @keyup      = "validateName()"
-                 placeholder = "lastname"
-                 type        = "text"
-                 v-model     = "contact.lastname"
-                 required>
+             :disabled   = "!edit"
+             id          = "lastname"
+             @keyup      = "validateName()"
+             placeholder = "lastname"
+             type        = "text"
+             v-model     = "contact.lastname"
+             required>
 
         </div>
       </div><!-- End contact name -->
@@ -62,14 +62,14 @@
         <label>Email</label>
 
         <i class          = "fa fa-plus-circle"
-           aria-hidden    = "true"
-           @click.prevent = "addEmail()"
-           v-show         = "edit"></i>
+         aria-hidden    = "true"
+         @click.prevent = "addEmail()"
+         v-show         = "edit"></i>
 
       </a>
 
       <div class = "form-group row"
-           v-for = "(email, index) in contact.email">
+         v-for = "(email, index) in contact.email">
 
         <label for="email" class="sr-only">Email</label>
 
@@ -100,15 +100,15 @@
         <label>Telephone Number</label>
 
         <i class          = "fa fa-plus-circle"
-           aria-hidden    = "true"
-           @click.prevent = "addPhoneNumber()"
-           v-show         = "edit"></i>
+         aria-hidden    = "true"
+         @click.prevent = "addPhoneNumber()"
+         v-show         = "edit"></i>
 
       </a>
 
       <!-- Loop through telephone and display them -->
       <div class = "form-group row"
-           v-for = "(number, index) in contact.phoneNumber">
+         v-for = "(number, index) in contact.phoneNumber">
 
         <!-- Screen reader label for Telephone -->
         <label for="telephone" class="sr-only">Telephone</label>
@@ -138,14 +138,14 @@
         <label>Address</label>
 
         <i class          = "fa fa-plus-circle"
-           aria-hidden    = "true"
-           @click.prevent = "addAddress()"
-           v-show         = "edit"></i>
+         aria-hidden    = "true"
+         @click.prevent = "addAddress()"
+         v-show         = "edit"></i>
       </a>
 
       <!-- Loop through addresses of contact and display them -->
       <div class = "form-group row"
-           v-for = "(address, index) in contact.address">
+         v-for = "(address, index) in contact.address">
 
         <!-- Screen reader label for address -->
         <label for="address" class="sr-only">Address</label>
@@ -180,10 +180,10 @@
         <div class="col-12">
 
           <datepicker input-class      = "form-control"
-                      id               = "dob"
-                      placeholder      = "DD/MM/YYYY"
-                      v-model          = "contact.dob"
-                      :disabled-picker = "!edit">
+             id               = "dob"
+             placeholder      = "DD/MM/YYYY"
+             v-model          = "contact.dob"
+             :disabled-picker = "!edit">
           </datepicker>
 
         </div>
@@ -194,36 +194,36 @@
     <div class="submit" v-show="view || newCon">
 
       <a href           = "javascript:void(0)"
-         class          = "action"
-         @click.prevent = "toggleEdit()"
-         v-show         = "!edit && view">
+                        class          = "action"
+                        @click.prevent = "toggleEdit()"
+                        v-show         = "!edit && view">
         Edit
         <i class="fa fa-pencil" aria-hidden="true"></i>
       </a>
 
       <!-- Save edits Button -->
       <a href           = "javascript:void(0)"
-         class          = "action save"
-         @click.prevent = "save()"
-         v-show         = "edit && view && submit">
+                                class          = "action save"
+                                @click.prevent = "save()"
+                                v-show         = "edit && view && submit">
         Save
         <i class="fa fa-floppy-o" aria-hidden="true"></i>
       </a>
 
       <!-- Save new contact button -->
       <a v-show         = "newCon && submit"
-         class          = "action save"
-         href           = "javascript:void(0)"
-         @click.prevent = "createContact()">
+                                  class          = "action save"
+                                  href           = "javascript:void(0)"
+                                  @click.prevent = "createContact()">
         Save
         <i class="fa fa-floppy-o" aria-hidden="true"></i>
       </a>
 
       <!-- Cancel the whole operation -->
       <a id             = "cancel"
-         class          = "action"
-         href           = "javascript:void(0)"
-         @click.prevent = "close()">
+                                  class          = "action"
+                                  href           = "javascript:void(0)"
+                                  @click.prevent = "close()">
         Cancel
         <i class="fa fa-times" aria-hidden="true"></i>
       </a>
@@ -323,7 +323,7 @@ export default {
     createContact: function () {
       this.$http.post('http://localhost:3000/api/contact/', this.contact)
         .then((data) => {
-          console.log(data);
+
         }, (data) => {
           console.log(data);
         });
@@ -333,7 +333,15 @@ export default {
      * This method is used to delete a contact
      */
     deleteContact: function () {
-
+      this.$http.delete('http://localhost:3000/api/contact/' + '01290')
+        .then((data) => {
+          sideNav.$emit('removeContact', {
+            contact: this.contact,
+            index: this.index
+          });
+        }, (data) => {
+          sideNave.$emit('showError', data);
+        });
     },
     /**
      * This method remove an element form an array
@@ -360,7 +368,6 @@ export default {
      * to the api
      */
     save: function () {
-      console.log(this.contact);
       this.$http.put('http://localhost:3000/api/contact/' + this.contact._id, this.contact)
         .then((data) => {
           console.log(data);
@@ -452,6 +459,12 @@ export default {
      */
     newCon: {
       type: Boolean
+    },
+    /**
+     * Stores the position oft the contact in the array
+     */
+    index: {
+      type: Number
     }
   }
 }
