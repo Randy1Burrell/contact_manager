@@ -4,7 +4,10 @@
       <i class="fa fa-angle-double-left" aria-hidden="true"></i>
     </a>
     <a href="#">
-      <i class="fa fa-address-book" aria-hidden="true"></i> Contacts <span class="badge badge-success">30</span>
+      <i class="fa fa-address-book" aria-hidden="true"></i> Contacts
+      <span class="badge badge-success">
+        {{ padCount }}
+      </span>
     </a>
     <a href="javascript:void(0)" @click="toggleNew()">
       <i aria-hidden="true" v-if="!newCon" class="fa fa-plus-circle"></i>
@@ -15,27 +18,33 @@
       <i data-v-46725f86="" aria-hidden="true" class="fa fa-cog"></i>
       Settings
     </a>
-    <div v-if="settings" class="show">
-      <h1>Settings</h1>
+    <div v-show="settings" class="show">
+      <app-settings></app-settings>
     </div>
     <a href="javascript:void(0)" @click="toggleHelp">
       <i data-v-46725f86="" aria-hidden="true" class="fa fa-question-circle"></i>
       Help
     </a>
-    <div v-if="help" :class="{show: help}">
-      <h1>Help</h1>
+    <div v-show="help" :class="{show: help}">
+      <app-help></app-help>
     </div>
   </div>
 </template>
 
 <script>
 import {sideNav} from '../bus/navigation'
+import HelpMenu from './Help.vue'
+import SettingsMenu from './Settings.vue'
 
 export default {
   name: 'Sidebar',
   data () {
     return {
     }
+  },
+  components: {
+    'app-help': HelpMenu,
+    'app-settings': SettingsMenu
   },
   methods: {
     closeNav: () => {
@@ -67,6 +76,14 @@ export default {
     },
     settings : {
       type   : Boolean
+    },
+    count : {
+      type: [String, Number]
+    }
+  },
+  computed: {
+    padCount: function () {
+      return (this.count < 10) ? '0' + this.count : this.count;
     }
   }
 }
@@ -142,7 +159,7 @@ $green : #4caf50;
  * Show the navbar
  */
 .open-nav {
-  width : 211px;
+  width : 250px;
 }
 
 /**
