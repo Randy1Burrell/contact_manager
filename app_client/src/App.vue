@@ -8,15 +8,20 @@
 
     <!-- Displays contacts -->
     <div :class="{'container-fluid': true, shiftSearch: toggle.search}">
-      <app-contacts v-bind         = "toggle"
-                    v-for          = "contact in searchContact"
-                    :key           = "contact._id"
-                    v-bind:contact = "contact">
+      <app-contacts v-bind      = "toggle"
+                 v-for          = "(contact, contact_index) in searchContact"
+                 :key           = "contact._id"
+                 v-bind:contact = "contact"
+                 v-bind:index   = "parseInt(contact_index)">
       </app-contacts>
     </div>
+
     <!-- Displays a single contact and all its details -->
-    <do-contact v-bind="toggle" v-bind:contact="contact">
+    <do-contact v-bind="toggle" v-bind:contact="contact" v-bind:index="parseInt(index)">
     </do-contact>
+
+    <!-- The actual snackbar -->
+    <div id="snackbar">{{ message }}</div>
   </div>
 </template>
 
@@ -59,7 +64,9 @@ export default {
         edit     : false,
         query    : ''
       },
-      contact    : {}
+      contact    : {},
+      index      : '',
+      message    : ''
     }
   },
   computed: {
@@ -128,6 +135,21 @@ export default {
       }
     },
   },
+  methods: {
+    showMessage: function() {
+      // Get the snackbar DIV
+      var snackbar = document.getElementById("snackbar")
+
+      // Add the "show" class to DIV
+      snackbar.className = "show";
+
+      // After 3 seconds, remove the show class from DIV
+      setTimeout(() => {
+        snackbar.className = snackbar.className.replace("show", "");
+      }, 3000);
+    }
+
+  },
   created: function () {
     // Changes query
     sideNav.$on("queryChanged", (event) => {
@@ -179,11 +201,12 @@ export default {
     });
 
     // view contact
-    sideNav.$on("viewContact", (contact) => {
+    sideNav.$on("viewContact", (event) => {
       this.toggle.newCon = false;
       this.toggle.view   = true;
       this.toggle.edit   = false;
-      this.contact       = contact;
+      this.contact       = event.contact;
+      this.index         = event.index;
     });
 
     // edit contact
@@ -201,6 +224,16 @@ export default {
       this.toggle.view   = false;
       this.toggle.newCon = false;
       this.toggle.edit   = false;
+    });
+
+    // Remove contact
+    sideNav.$on("removeContact", (event) => {
+      var contact = event.contact;
+      this.message = contact.firstname + ' ' + contact.lastname;
+      this.message += ' has been deleted from contact list';
+      this.contacts.splice(event.index, 1);
+      this.showMessage();
+      sideNav.$emit("close", true);
     });
 
     // Get contacts from server
@@ -246,5 +279,59 @@ export default {
   .shiftSearch {
     padding-top : 110px !important;
   }
+}
+
+/**
+ * The snackbar - position it at
+ * the bottom and in the middle
+ * of the screen
+ */
+#snackbar {
+  visibility: hidden;
+  min-width: 250px;
+  margin-left: -125px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 2px;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  bottom: 30px;
+}
+
+/**
+ * Show the snackbar when clicking
+ * on a button (class added with JavaScript)
+ */
+#snackbar.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+/**
+ * Animations to fade the snackbar
+ * in and out
+ */
+@-webkit-keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
 }
 </style>
