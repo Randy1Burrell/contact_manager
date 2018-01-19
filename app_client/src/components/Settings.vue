@@ -6,7 +6,7 @@
       <div class="form-group">
         <label class="mr-sm-2" for="sideBarOpt">Preference</label>
         <select class = "custom-select mb-2 mr-sm-2 mb-sm-0"
-                id    = "sideBarOpt" @click.prevent="saveSettings()">
+                               id    = "sideBarOpt" @click.prevent="saveSettings()">
           <option value="0" selected>Start up option</option>
           <option value="1">Sidebar</option>
           <option value="2">No Sidebar</option>
@@ -41,6 +41,10 @@ export default {
         var remember = document.getElementById("remember");
         var sidebar = document.getElementById("sideBarOpt");
 
+        /**
+         * Store value in local/session storage based
+         * based on used selection from menu
+         */
         if (sidebar !== null) {
           sidebar = sidebar.options[sidebar.selectedIndex].value;
           if (remember.checked) {
