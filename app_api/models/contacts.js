@@ -43,6 +43,10 @@ var contactSchema = new mongoose.Schema({
     unique: true,
     required: true
   },
+  createdOn: {
+    type: Date,
+    "default": Date.now
+  }
 });
 
 /**
