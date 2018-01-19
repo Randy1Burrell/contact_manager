@@ -61,7 +61,7 @@
       <a href="javascript:void(0)">
         <label>Email</label>
 
-        <i class          = "fa fa-plus-circle"
+        <i class        = "fa fa-plus-circle"
          aria-hidden    = "true"
          @click.prevent = "addEmail()"
          v-show         = "edit"></i>
