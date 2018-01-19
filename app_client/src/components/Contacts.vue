@@ -61,7 +61,10 @@ export default {
      * and will be put in a mixing file.
      */
     viewContact: function() {
-      sideNav.$emit("viewContact", this.contact);
+      sideNav.$emit("viewContact", {
+        contact: this.contact,
+        index: this.index
+      });
     }
   },
   props: {
@@ -83,6 +86,13 @@ export default {
      */
     search : {
       type : Boolean
+    },
+    /**
+     * Keep track of the index of the contact
+     * for deletion purposes
+     */
+    index : {
+      type : Number
     }
   },
 }
