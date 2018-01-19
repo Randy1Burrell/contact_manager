@@ -136,7 +136,7 @@ export default {
     },
   },
   methods: {
-    showMessage: function() {
+    showMessage: function(timeOut) {
       // Get the snackbar DIV
       var snackbar = document.getElementById("snackbar")
 
@@ -146,9 +146,16 @@ export default {
       // After 3 seconds, remove the show class from DIV
       setTimeout(() => {
         snackbar.className = snackbar.className.replace("show", "");
-      }, 3000);
+      }, parseInt(timeOut));
+    },
+    getContacts: function () {
+      this.$http.get('http://localhost:3000/api/contact/').then((data) => {
+        this.contacts = data.body;
+      },(data) => {
+        this.message = data.body.message;
+        this.showMessage(5000);
+      })
     }
-
   },
   created: function () {
     // Changes query
@@ -228,18 +235,23 @@ export default {
 
     // Remove contact
     sideNav.$on("removeContact", (event) => {
-      var contact = event.contact;
-      this.message = contact.firstname + ' ' + contact.lastname;
-      this.message += ' has been deleted from contact list';
+      var contact    = event.contact;
+      this.message   = contact.firstname + ' ' + contact.lastname;
+      this.message  += ' has been deleted from contact list';
       this.contacts.splice(event.index, 1);
-      this.showMessage();
+      this.showMessage(3000);
       sideNav.$emit("close", true);
     });
 
-    // Get contacts from server
-    this.$http.get('http://localhost:3000/api/contact/').then((data) => {
-      this.contacts = data.body;
+    sideNav.$on("showMessage", (event) => {
+      this.message = event.body.message;
+      this.showMessage(5000);
     });
+    // Get contacts from server
+    this.getContacts();
+
+    // Update page every 15 seconds
+    setInterval(this.getContacts(), 15000);
   },
 }
 </script>
