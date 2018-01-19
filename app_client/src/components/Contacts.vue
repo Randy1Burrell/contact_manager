@@ -144,7 +144,7 @@ div {
 }
 
 .shift {
-  margin-left : 200px !important;
+  margin-left : 250px !important;
 }
 
 @media screen and (max-width: 991px) {
