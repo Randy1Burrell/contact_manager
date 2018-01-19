@@ -45,7 +45,7 @@
         <label class="sr-only" for="lastname">Lastname</label>
         <div class="col-6">
 
-          <input class       = "form-control"
+          <input class   = "form-control"
              :disabled   = "!edit"
              id          = "lastname"
              @keyup      = "validateName()"
