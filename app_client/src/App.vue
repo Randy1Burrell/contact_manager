@@ -256,7 +256,7 @@ export default {
     this.getContacts();
 
     // Update page every 15 seconds
-    setInterval(this.getContacts(), 10000);
+    setInterval(this.getContacts, 5000);
   },
 }
 </script>
