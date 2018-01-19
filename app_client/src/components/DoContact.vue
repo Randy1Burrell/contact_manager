@@ -323,24 +323,29 @@ export default {
     createContact: function () {
       this.$http.post('http://localhost:3000/api/contact/', this.contact)
         .then((data) => {
-
+          sideNav.$emit("showMessage", {
+            body: {
+              message: "Contact " + this.contact.firstname + " "
+              + this.contact.lastname +
+              " has been created!!."
+            }
+          });
         }, (data) => {
-          console.log(data);
+          sideNav.$emit("showMessage", data);
         });
-      this.submit = true;
     },
     /**
      * This method is used to delete a contact
      */
     deleteContact: function () {
-      this.$http.delete('http://localhost:3000/api/contact/' + '01290')
+      this.$http.delete('http://localhost:3000/api/contact/' + this.contact._id)
         .then((data) => {
           sideNav.$emit('removeContact', {
             contact: this.contact,
             index: this.index
           });
         }, (data) => {
-          sideNave.$emit('showError', data);
+          sideNav.$emit('showMessage', data);
         });
     },
     /**
@@ -370,12 +375,16 @@ export default {
     save: function () {
       this.$http.put('http://localhost:3000/api/contact/' + this.contact._id, this.contact)
         .then((data) => {
-          console.log(data);
+          var contact = this.contact;
+          sideNav.$emit("showMessage", {
+            body: {
+              message: "Contact " + contact.firstname + " " + contact.lastname + " has been updated"
+            }
+          });
         }, (data) => {
-          console.log(data);
+          sideNav.$emit('showMessage', data);
         });
       sideNav.$emit("save", true);
-      this.submit = true;
     },
     /**
      * Used to check if the length of an array is
