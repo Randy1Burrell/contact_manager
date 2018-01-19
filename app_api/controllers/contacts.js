@@ -274,7 +274,9 @@ module.exports.getContactList = function(req, res) {
    * Contact list response controller
    */
   var contactList = function(err, results, status) {
-    if (err) {} else {
+    if (err) {
+      sendJsonResponse(res, 404, err);
+    } else {
       sendJsonResponse(res, 200, results);
     }
   };
@@ -284,7 +286,7 @@ module.exports.getContactList = function(req, res) {
   contact.
   find({}).
   sort({
-    firstname: 1
+    firstname: 'asc'
   }).
   exec(contactList);
 }
