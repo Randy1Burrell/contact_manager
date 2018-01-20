@@ -3,7 +3,7 @@
     <a href="javascript:void(0)" class="closebtn" @click.prevent="closeNav()">
       <i class="fa fa-angle-double-left" aria-hidden="true"></i>
     </a>
-    <a href="#">
+    <a href="javascript:void(0)">
       <i class="fa fa-address-book" aria-hidden="true"></i> Contacts
       <span class="badge badge-success">
         {{ padCount }}
