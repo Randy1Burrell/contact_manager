@@ -6,7 +6,6 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var cors = require('cors');
-var fs = require('fs');
 // Include database and its schemas in application
 require('./app_api/models/db.js');
 
@@ -21,11 +20,15 @@ app.set('view engine', 'jade');
 /**
  * Copy app_client/dist/build.js to
  * public/app_client/dist/build.js
+ * when in development mode
  */
-fs.createReadStream('app_client/dist/build.js')
-  .pipe(
-    fs.createWriteStream('public/app_client/dist/build.js')
-  );
+if (process.env.NODE_ENV === "development") {
+  var fs = require('fs');
+  fs.createReadStream('app_client/dist/build.js')
+    .pipe(
+      fs.createWriteStream('public/app_client/dist/build.js')
+    );
+}
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({

@@ -7,7 +7,7 @@
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
     "dev": "cross-env NODE_ENV=development webpack -d && webpack-dev-server --content-base app_client/ --open --hot --watch",
-    "start": "node ./bin/www"
+    "start": "npm run dev | node ./bin/www"
   },
   "engines": {
     "node": "~8.9.1",
