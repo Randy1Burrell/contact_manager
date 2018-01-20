@@ -41,6 +41,11 @@ import Navbar from './components/Navbar.vue'
 import DoContact from './components/DoContact.vue'
 
 /**
+ * Import configuration file
+ */
+import config from './config'
+
+/**
  * Controller component for app clientcomponents
  */
 export default {
@@ -55,6 +60,7 @@ export default {
     return {
       contacts   : [],
       toggle     : {
+        api      : config.API,
         help     : false,
         openNav  : false,
         newCon   : false,
@@ -154,7 +160,7 @@ export default {
       }, parseInt(timeOut));
     },
     getContacts: function () {
-      this.$http.get('http://localhost:3000/api/contact/').then((data) => {
+      this.$http.get(this.toggle.api).then((data) => {
         this.contacts = data.body;
       },(data) => {
         this.message = data.body.message;
