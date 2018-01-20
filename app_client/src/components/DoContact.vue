@@ -195,36 +195,36 @@
     <div class="submit" v-show="view || newCon">
 
       <a class          = "action"
-         href           = "javascript:void(0)"
-         @click.prevent = "toggleEdit()"
-         v-show         = "!edit && view">
+                        href           = "javascript:void(0)"
+                        @click.prevent = "toggleEdit()"
+                        v-show         = "!edit && view">
         Edit
         <i class="fa fa-pencil" aria-hidden="true"></i>
       </a>
 
       <!-- Save edits Button -->
       <a href           = "javascript:void(0)"
-         class          = "action save"
-         @click.prevent = "save()"
-         v-show         = "edit && view && submit">
+                                class          = "action save"
+                                @click.prevent = "save()"
+                                v-show         = "edit && view && submit">
         Save
         <i class="fa fa-floppy-o" aria-hidden="true"></i>
       </a>
 
       <!-- Save new contact button -->
       <a v-show        = "newCon && submit"
-        class          = "action save"
-        href           = "javascript:void(0)"
-        @click.prevent = "createContact()">
+                                  class          = "action save"
+                                  href           = "javascript:void(0)"
+                                  @click.prevent = "createContact()">
         Save
         <i class="fa fa-floppy-o" aria-hidden="true"></i>
       </a>
 
       <!-- Cancel the whole operation -->
       <a id             = "cancel"
-         class          = "action"
-         href           = "javascript:void(0)"
-         @click.prevent = "close()">
+                                  class          = "action"
+                                  href           = "javascript:void(0)"
+                                  @click.prevent = "close()">
         Cancel
         <i class="fa fa-times" aria-hidden="true"></i>
       </a>
@@ -243,7 +243,9 @@ import Datepicker from 'vuejs-datepicker'
  * Get event bus here
  */
 import {sideNav} from '../bus/navigation'
-
+/**
+ * Import configuration file
+ */
 export default {
   nmae: 'DoContact',
   components: {
@@ -322,7 +324,7 @@ export default {
      * create a new contact
      */
     createContact: function () {
-      this.$http.post('http://localhost:3000/api/contact/', this.contact)
+      this.$http.post(this.api, this.contact)
         .then((data) => {
           sideNav.$emit("showMessage", {
             body: {
@@ -339,7 +341,7 @@ export default {
      * This method is used to delete a contact
      */
     deleteContact: function () {
-      this.$http.delete('http://localhost:3000/api/contact/' + this.contact._id)
+      this.$http.delete(this.api + this.contact._id)
         .then((data) => {
           sideNav.$emit('removeContact', {
             contact: this.contact,
@@ -374,7 +376,7 @@ export default {
      * to the api
      */
     save: function () {
-      this.$http.put('http://localhost:3000/api/contact/' + this.contact._id, this.contact)
+      this.$http.put(this.api + this.contact._id, this.contact)
         .then((data) => {
           var contact = this.contact;
           sideNav.$emit("showMessage", {
@@ -443,6 +445,13 @@ export default {
     },
   },
   props: {
+    /**
+     * Api URL
+     */
+    api: {
+      type: String,
+      required: true
+    },
     /**
      * Contact object that is used to display contacts
      */
