@@ -1,3 +1,3 @@
 module.exports = {
-  API: 'http://localhost:3000/api/contact/'
+  API: 'https://calm-harbor-49946.herokuapp.com/api/contact/'
 }
