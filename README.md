@@ -1,6 +1,6 @@
 # Contact Manager
-Contact Manager is a simple sample web application build in mongodb, nodejs,
-express and vue.js. Contact Manager provides features such as:
+Contact Manager is a simple sample single page web application build with Mongodb,
+Node.js, Express and Vue.js. Contact Manager provides features such as:
 * Easy access to contacts
 * Ability to delete contacts
 * Abiltiy to update a contact
