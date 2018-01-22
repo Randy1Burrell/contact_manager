@@ -11,4 +11,7 @@ __You may **test** it out__
 
 A few pics of the app.
 
-![Contact Management Application Editing A Contact With Sidebar Present](https://www.randyburrell.info/projects/wp-content/uploads/sites/2/2018/01/edit-contact-sidebar.png")
+![Contact Management Application Editing A Contact With Sidebar Present](https://www.randyburrell.info/projects/wp-content/uploads/sites/2/2018/01/edit-contact-sidebar.png)
+![Contact Management Application Search](https://www.randyburrell.info/projects/wp-content/uploads/sites/2/2018/01/search.png)
+![Contact Management Application Setting and Help Menus](https://www.randyburrell.info/projects/wp-content/uploads/sites/2/2018/01/new-contacts-settings-help.png)
+![Contact Management Application with Side bar](https://www.randyburrell.info/projects/wp-content/uploads/sites/2/2018/01/new-contact-sidebar.png)
