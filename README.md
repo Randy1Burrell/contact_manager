@@ -1,4 +1,4 @@
-# contact manager
+# Contact Manager
 Contact management is a simple sample web application build in mongodb, nodejs,
 express and vue.js. Contact manager provide features such as:
 * Easy access to contacts
