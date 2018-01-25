@@ -194,37 +194,37 @@
     <!-- Submit section -->
     <div class="submit" v-show="view || newCon">
 
-      <a class          = "action"
-                        href           = "javascript:void(0)"
-                        @click.prevent = "toggleEdit()"
-                        v-show         = "!edit && view">
+      <a class= "action"
+         href= "javascript:void(0)"
+         @click.prevent = "toggleEdit()"
+         v-show         = "!edit && view">
         Edit
         <i class="fa fa-pencil" aria-hidden="true"></i>
       </a>
 
       <!-- Save edits Button -->
-      <a href           = "javascript:void(0)"
-                                class          = "action save"
-                                @click.prevent = "save()"
-                                v-show         = "edit && view && submit">
+      <a href= "javascript:void(0)"
+         class= "action save"
+         @click.prevent = "save()"
+         v-show= "edit && view && submit">
         Save
         <i class="fa fa-floppy-o" aria-hidden="true"></i>
       </a>
 
       <!-- Save new contact button -->
-      <a v-show        = "newCon && submit"
-                                  class          = "action save"
-                                  href           = "javascript:void(0)"
-                                  @click.prevent = "createContact()">
+      <a v-show= "newCon"
+         class= "action save"
+         href           = "javascript:void(0)"
+         @click.prevent = "createContact()">
         Save
         <i class="fa fa-floppy-o" aria-hidden="true"></i>
       </a>
 
       <!-- Cancel the whole operation -->
-      <a id             = "cancel"
-                                  class          = "action"
-                                  href           = "javascript:void(0)"
-                                  @click.prevent = "close()">
+      <a id= "cancel"
+         class= "action"
+         href           = "javascript:void(0)"
+         @click.prevent = "close()">
         Cancel
         <i class="fa fa-times" aria-hidden="true"></i>
       </a>
