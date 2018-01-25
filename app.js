@@ -15,7 +15,7 @@ var routesApi = require('./app_api/routes/index');
 var app = express();
 
 // view engine setup
-app.set('views', path.join(__dirname, 'app_client'));
+app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 /**
  * Copy app_client/dist/build.js to
