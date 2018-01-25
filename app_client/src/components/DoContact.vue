@@ -9,7 +9,7 @@
         <li @click="close()">
           <i class="fa fa-times" aria-hidden="true"></i>
         </li>
-        <li v-show="newCon" class="action">
+        <li v-show="newCon" id="new-con" class="action">
           New Contact &nbsp; &nbsp;
           <i class="fa fa-address-card" aria-hidden="true"></i>
         </li>
@@ -609,6 +609,10 @@ form {
       border        : 1px solid $green;
       border-radius : 50%;
     }
+  }
+  ul #new-con:hover {
+    background-color: $green !important;
+    color: #fff;
   }
 }
 
