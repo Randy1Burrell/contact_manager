@@ -121,6 +121,7 @@
              @keyup      = "validatePhoneNumber"
              placeholder = "Ex: 1-(192)-304-3049"
              v-model     = "contact.phoneNumber[index]"
+             v-mask      = "'+#(###)-###-####'"
              required>
 
           <!-- Remove phone number of contact-->
@@ -195,36 +196,36 @@
     <div class="submit" v-show="view || newCon">
 
       <a class= "action"
-         href= "javascript:void(0)"
-         @click.prevent = "toggleEdit()"
-         v-show         = "!edit && view">
+                        href= "javascript:void(0)"
+                        @click.prevent = "toggleEdit()"
+                        v-show         = "!edit && view">
         Edit
         <i class="fa fa-pencil" aria-hidden="true"></i>
       </a>
 
       <!-- Save edits Button -->
       <a href= "javascript:void(0)"
-         class= "action save"
-         @click.prevent = "save()"
-         v-show= "edit && view && submit">
+                                class= "action save"
+                                @click.prevent = "save()"
+                                v-show= "edit && view && submit">
         Save
         <i class="fa fa-floppy-o" aria-hidden="true"></i>
       </a>
 
       <!-- Save new contact button -->
       <a v-show= "newCon"
-         class= "action save"
-         href           = "javascript:void(0)"
-         @click.prevent = "createContact()">
+                                  class= "action save"
+                                  href           = "javascript:void(0)"
+                                  @click.prevent = "createContact()">
         Save
         <i class="fa fa-floppy-o" aria-hidden="true"></i>
       </a>
 
       <!-- Cancel the whole operation -->
       <a id= "cancel"
-         class= "action"
-         href           = "javascript:void(0)"
-         @click.prevent = "close()">
+                                  class= "action"
+                                  href           = "javascript:void(0)"
+                                  @click.prevent = "close()">
         Cancel
         <i class="fa fa-times" aria-hidden="true"></i>
       </a>
@@ -235,6 +236,10 @@
 
 
 <script>
+/**
+ * Using vue-mask as a directive
+ */
+import {mask} from 'vue-the-mask'
 /**
  * Import vuejs-datepicker to use in form
  */
@@ -285,6 +290,9 @@ export default {
         return this.submitEmail && this.submitName && this.phoneNumber;
       }
     }
+  },
+  directives: {
+    mask
   },
   methods: {
     /**
