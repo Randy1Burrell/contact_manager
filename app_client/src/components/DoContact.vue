@@ -119,7 +119,7 @@
              type        = "tel"
              id          = "telephone"
              @keyup      = "validatePhoneNumber"
-             placeholder = "Ex: 1-(192)-304-3049"
+             placeholder = "Ex: +1(192)-304-3049"
              v-model     = "contact.phoneNumber[index]"
              v-mask      = "'+#(###)-###-####'"
              required>
