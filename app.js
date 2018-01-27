@@ -22,7 +22,7 @@ app.set('view engine', 'jade');
  * public/app_client/dist/build.js
  * when in development mode
  */
-if (process.env.NODE_ENV === "development") {
+if (process.env.NODE_ENV !== "development") {
   var fs = require('fs');
   fs.createReadStream('app_client/dist/build.js')
     .pipe(
