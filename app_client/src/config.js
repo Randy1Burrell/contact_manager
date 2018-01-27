@@ -1,3 +1,11 @@
+var get_api = function () {
+  if (process.env.NODE_ENV === "Production" ) {
+    return 'https://calm-harbor-49946.herokuapp.com/api/contact/';
+  } else {
+    return 'http://localhost:3000/api/contact/';
+  }
+};
+
 module.exports = {
-  API: 'https://calm-harbor-49946.herokuapp.com/api/contact/'
+  API: get_api()
 }
