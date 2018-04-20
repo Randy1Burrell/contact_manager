@@ -6,7 +6,6 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var cors = require('cors');
-
 // Include database and its schemas in application
 require('./app_api/models/db.js');
 
@@ -16,9 +15,20 @@ var routesApi = require('./app_api/routes/index');
 var app = express();
 
 // view engine setup
-app.set('views', path.join(__dirname, 'app_client'));
+app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
-
+/**
+ * Copy app_client/dist/build.js to
+ * public/app_client/dist/build.js
+ * when in development mode
+ */
+if (process.env.NODE_ENV === "development") {
+  var fs = require('fs');
+  fs.createReadStream('app_client/dist/build.js')
+    .pipe(
+      fs.createWriteStream('public/app_client/dist/build.js')
+    );
+}
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({

@@ -16,7 +16,11 @@
         <label class = "custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0"
            @click    = "saveSettings()">
 
-          <input id="remember" type="checkbox" class="custom-control-input">
+          <input @click = "saveSettings()"
+           id           = "remember"
+           type         = "checkbox"
+           class        = "custom-control-input">
+
           <span class="custom-control-indicator"></span>
           <span class="custom-control-description">Remember my preference</span>
 
@@ -57,6 +61,7 @@ export default {
           if (localStorage.sidebar) {
             localStorage.removeItem("sidebar");
           }
+          sessionStorage.setItem("sidebar", sidebar);
         }
       } else {
         // Sorry! No Web Storage support..

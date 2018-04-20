@@ -9,7 +9,7 @@
         <li @click="close()">
           <i class="fa fa-times" aria-hidden="true"></i>
         </li>
-        <li v-show="newCon" class="action">
+        <li v-show="newCon" id="new-con" class="action">
           New Contact &nbsp; &nbsp;
           <i class="fa fa-address-card" aria-hidden="true"></i>
         </li>
@@ -119,8 +119,10 @@
              type        = "tel"
              id          = "telephone"
              @keyup      = "validatePhoneNumber"
-             placeholder = "Ex: 1-(192)-304-3049"
+             placeholder = "Ex: +1(192)-304-3049"
              v-model     = "contact.phoneNumber[index]"
+             v-mask      = "['###', '###-#', '###-##',
+                             '###-###', '###-####', '+1(###)-###-####']"
              required>
 
           <!-- Remove phone number of contact-->
@@ -194,8 +196,8 @@
     <!-- Submit section -->
     <div class="submit" v-show="view || newCon">
 
-      <a class          = "action"
-                        href           = "javascript:void(0)"
+      <a class= "action"
+                        href= "javascript:void(0)"
                         @click.prevent = "toggleEdit()"
                         v-show         = "!edit && view">
         Edit
@@ -203,17 +205,17 @@
       </a>
 
       <!-- Save edits Button -->
-      <a href           = "javascript:void(0)"
-                                class          = "action save"
+      <a href= "javascript:void(0)"
+                                class= "action save"
                                 @click.prevent = "save()"
-                                v-show         = "edit && view && submit">
+                                v-show= "edit && view && submit">
         Save
         <i class="fa fa-floppy-o" aria-hidden="true"></i>
       </a>
 
       <!-- Save new contact button -->
-      <a v-show        = "newCon && submit"
-                                  class          = "action save"
+      <a v-show= "newCon"
+                                  class= "action save"
                                   href           = "javascript:void(0)"
                                   @click.prevent = "createContact()">
         Save
@@ -221,8 +223,8 @@
       </a>
 
       <!-- Cancel the whole operation -->
-      <a id             = "cancel"
-                                  class          = "action"
+      <a id= "cancel"
+                                  class= "action"
                                   href           = "javascript:void(0)"
                                   @click.prevent = "close()">
         Cancel
@@ -235,6 +237,10 @@
 
 
 <script>
+/**
+ * Using vue-mask as a directive
+ */
+import {mask} from 'vue-the-mask'
 /**
  * Import vuejs-datepicker to use in form
  */
@@ -285,6 +291,9 @@ export default {
         return this.submitEmail && this.submitName && this.phoneNumber;
       }
     }
+  },
+  directives: {
+    mask
   },
   methods: {
     /**
@@ -609,6 +618,10 @@ form {
       border        : 1px solid $green;
       border-radius : 50%;
     }
+  }
+  ul #new-con:hover {
+    background-color: $green !important;
+    color: #fff;
   }
 }
 
