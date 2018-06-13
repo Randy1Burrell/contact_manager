@@ -5,7 +5,12 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        echo "Hello World"
+        sh 'echo "Hello World"'
+      }
+    }
+    stage('Test') {
+      steps {
+        sh 'npm test'
       }
     }
   }
