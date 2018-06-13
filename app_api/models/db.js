@@ -15,7 +15,7 @@ mongoose = require('mongoose');
 /**
  * Create connection string to mongodb
  */
-var dbURI = 'mongodb://localhost/contacts';
+var dbURI = 'mongodb://localhost:8081/contacts';
 /**
  * Set connection string to a different URI
  * when in production. For this to happen
@@ -39,7 +39,7 @@ if (process.env.NODE_ENV === 'production') {
      * If MONGOLAB_URI was not set in .env
      * file then revert to default URI
      */
-    dbURI = 'mongodb://localhost/contacts';
+    dbURI = 'mongodb://localhost:8081/contacts';
   }
 }
 
