@@ -1,0 +1,17 @@
+version: "2"
+services:
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
+  node_manager:
+    image: contact_manager:latest
+    user: "node"
+    environment:
+      - NODE_ENV=production
+      - MONGOLAB_URI=mongodb://mongo_1/contacts
+    working_dir: /usr/src/app
+    expose:
+      - "3000"
+    depends_on: ["mongo"]
+    links: ["mongo"]
